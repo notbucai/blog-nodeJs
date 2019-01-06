@@ -1,0 +1,18 @@
+.hentry {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.hentry h1 {
+  margin: 6px 0 15px;
+  font-size: 18px;
+}
+.hentry h1 span {
+  font-weight: bold;
+  color: #51aded;
+}
+.hentry p {
+  padding-top: 6px;
+}

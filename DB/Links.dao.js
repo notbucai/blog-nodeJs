@@ -4,14 +4,11 @@ const mongoose = require('./dbUtlis.js');
 
 {
 	_id:ObjectId,
-	p_id:ObjectId, //栏目id
 	title:String,
-	content:String,
 	info:String,
-	a_img:String,
-	add_time:Date,
-	update_time:Date,
-	hits:Number
+	link:String,
+	l_img:String,
+
 }
 
 */
@@ -19,43 +16,25 @@ const mongoose = require('./dbUtlis.js');
 const Schema = mongoose.Schema({
   title: {
     type: String,
-    required: true,
-    maxlength: 60
-  },
-  content: {
-    type: String,
     required: true
   },
   info: {
     type: String,
     required: true,
-    maxlength: 300
   },
-  p_id: {
-    type: mongoose.Types.ObjectId,
-    default: null
-  }, //栏目id
-  a_img: {
+  link: {
     type: String,
-    default: null
+    required: true,
   },
-  add_time: {
-    type: Date,
-    default: Date.now,
-  },
-  update_time: {
-    type: Date,
-    default: Date.now
-  },
-  hits: {
-    type: Number,
-    default: 0
+  l_img: {
+    type: String,
+    required: true,
   }
 });
 
-const Articles = mongoose.model('Article', Schema);
+const Link = mongoose.model('Link', Schema);
+module.exports = Link;
 
-module.exports = Articles;
 // const article = new Articles({
 //   title: "**测试===",
 //   content: "1231231",

@@ -1,0 +1,51 @@
+<%- include('public/header',{title:title+"测试"}); %>
+
+<div id="sform">
+
+  <div class="form-con">
+    <h1>在这个站点注册</h1>
+    <form action="" method="post" id="rl_form">
+
+      <div class="form-box">
+        <input type="text" class="input" placeholder="昵称" name="u_name">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <input type="password" class="input" placeholder="密码" name="u_pwd">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="input" placeholder="邮箱" name="u_email">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <input type="text" class="input" placeholder="验证码" name="code" maxlength="6">
+        <p class="form-info">错误信息显示</p>
+        <div class="code" id="code">
+          <span>获取验证码</span>
+        </div>
+      </div>
+
+      <div class="form-box">
+        <button type="submit">注册</button>
+      </div>
+
+    </form>
+    <div class="form-o">
+      <div>
+        <a href="/">← 返回到犬's Blog</a>
+      </div>
+      <div>
+        <a href="/login">登录</a>
+        |
+        <a href="/repwd">忘记密码？ </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%- include('public/footer'); %>

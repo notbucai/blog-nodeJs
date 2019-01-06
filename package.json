@@ -10,8 +10,16 @@
   "author": "1450941858@qq.com",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.6.1",
+    "ioredis": "^4.3.0",
     "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "mongodb": "^3.1.10"
+    "koa-session2": "^2.2.8",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.1.5",
+    "mongodb": "^3.1.10",
+    "mongolass": "^4.4.1",
+    "mongoose": "^5.4.1"
   }
 }

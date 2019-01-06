@@ -1,0 +1,57 @@
+#actions {
+  position: fixed;
+  z-index: 4;
+  right: 3%;
+  bottom: 4%;
+  .black {
+    height: 40px;
+    background-color: rgba(40, 42, 44, 0.6);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-left: auto;
+    i {
+      width: 40px;
+      height: 40px;
+      line-height: 38px;
+      z-index: 4;
+      float: left;
+      padding: 0;
+    }
+  }
+  .backtop {
+    display: none;
+    width: 40px;
+  }
+  .search {
+    position: relative;
+    overflow: hidden;
+    &-form {
+      display: none;
+      float: left;
+      right: 40px;
+      bottom: 0;
+      height: 40px;
+      width: 160px;
+      input {
+        color: #f1f1f1;
+        font-weight: bold;
+        height: 100%;
+        width: 100%;
+        border: none;
+        background-color: rgba(40, 42, 44, 0.6);
+        padding: 0 4px;
+        font-size: 14px;
+        line-height: 36px;
+        &:focus {
+          outline: none;
+        }
+        &::placeholder {
+          color: #ddd;
+        }
+      }
+    }
+  }
+}

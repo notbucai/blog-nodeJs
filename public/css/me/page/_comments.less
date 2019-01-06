@@ -1,0 +1,131 @@
+.comments {
+  margin-bottom: 15px;
+  header {
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    margin-bottom: 15px;
+    padding: 15px;
+    h1 {
+      font-size: 26px;
+      margin: 0;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #dfdfdf;
+      font-weight: bold;
+    }
+    p {
+      margin: 15px 0;
+    }
+  }
+  &-form {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+    position: relative;
+    z-index: 10;
+    .form {
+      &-btn {
+        border-radius: 0;
+        color: #fff;
+        background-color: #15b9fa;
+        transition: all .6s;
+        &:hover {
+          background-color: #393e46;
+        }
+      }
+      &-textarea {
+        background-color: transparent;
+      }
+    }
+    >h4 {
+      color: #444;
+    }
+    >p {
+      color: #888;
+    }
+    .form-control {
+      box-shadow: none;
+    }
+    .input-group-addon:first-child,
+    textarea.form-control,
+    .input-group .form-control:last-child,
+    .input-group-addon:last-child,
+    .input-group-btn:first-child>.btn-group:not(:first-child)>.btn,
+    .input-group-btn:first-child>.btn:not(:first-child),
+    .input-group-btn:last-child>.btn,
+    .input-group-btn:last-child>.btn-group>.btn,
+    .input-group-btn:last-child>.dropdown-toggle {
+      border-radius: 0;
+    }
+  }
+  main {}
+  .comment {
+    &-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    &-item {
+      background-color: #fff;
+      margin: 0;
+      margin-bottom: 15px;
+      min-height: 80px;
+      box-shadow: 0 2px 4px rgba(100, 100, 100, .1);
+      padding: 15px;
+      position: relative;
+      &.active {
+        box-shadow: 0px 2px 2px 2px rgba(100, 0, 0, .1);
+      }
+      &:hover {
+        .comment-action {
+          display: block;
+          animation-name: reply_a;
+          animation-duration: .5s;
+          animation-timing-function: linear;
+          animation-iteration-count: 1;
+          animation-direction: normal;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+    &-content {
+      line-height: 28px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      >.at {
+        background-color: #f8f8f8;
+        padding: 4px;
+        border: 1px solid #f1f1f1;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #51aded;
+        cursor: pointer;
+      }
+    }
+    &-action {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      margin: 15px;
+      background-color: rgba(50, 50, 50, .5);
+      padding: 4px 8px;
+      display: none;
+      opacity: 0;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+}
+
+@keyframes reply_a {
+  to {
+    display: block;
+    opacity: 1;
+  }
+  from {
+    opacity: 0;
+  }
+}

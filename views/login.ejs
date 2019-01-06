@@ -1,0 +1,47 @@
+<%- include('public/header',{title:subhead + " - " + title}); %>
+
+<div id="info_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      
+    </div>
+  </div>
+</div>
+
+<div id="sform">
+
+  <div class="form-con">
+    <h1>在这个站点登陆</h1>
+    <form action="/api/login" method="post" id="rl_form">
+
+      <div class="form-box">
+        <input type="text" class="input" placeholder="昵称/邮箱" name="u_login">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <input type="password" class="input" placeholder="密码" name="u_pwd">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <button type="submit">登陆</button>
+      </div>
+
+    </form>
+    <div class="form-o">
+      <div>
+        <a href="/">← 返回到<%=title%></a>
+      </div>
+      <div>
+        <a href="/reg">注册</a>
+        |
+        <a href="/repwd">忘记密码？ </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<%- include('public/footer'); %>

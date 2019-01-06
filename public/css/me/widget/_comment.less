@@ -1,0 +1,62 @@
+.widget.comment {
+  padding: 15px;
+  header {
+    border-bottom: 2px solid #f1f1f1;
+    .title {
+      font-size: 16px;
+      border-bottom: 3px solid #51aded;
+      display: inline-block;
+      margin: 0;
+      padding: 0 0 10px;
+      position: relative;
+      bottom: -2px;
+    }
+  }
+  main {
+    .recentcomments {
+      list-style-type: none;
+      padding-left: 50px;
+      padding-top: 15px;
+      .comment {
+        &-item {
+          position: relative;
+          padding: 10px;
+        }
+        &-img {
+          position: absolute;
+          left: -50px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          overflow: hidden;
+          box-shadow: 0 0.125rem 1.0625rem 0 rgba(0, 0, 0, .1);
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        &-detail {
+          p {
+            padding: 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+        &-name {
+          color: #848484;
+          margin-bottom: 0px;
+          samp {
+            margin-left: 8px;
+            a {
+              margin-left: 6px;
+            }
+          }
+        }
+        &-content {
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}
