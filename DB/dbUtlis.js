@@ -1,6 +1,6 @@
 const { url, dbName } = require('../config/db.config.js');
 
-var Mongoose = require('Mongoose')
+var Mongoose = require('mongoose')
 
 const start = Date.now();
 

@@ -1,38 +1,10 @@
-<%- include('public/header',{title:subhead + " - " + title}); %>
+<%- include('public/header',{title:title}); %>
 
-<div id="header">
 
-  <div class="container">
-    <nav class="navbar navbar-default">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-static-top">
-          <li><a href="#">首页 <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">文章</a></li>
-          <li><a href="#">功能</a></li>
-          <li><a href="#">工具</a></li>
-          <li><a href="#">商店</a></li>
-          <li><a href="#">友链</a></li>
-          <li><a href="#">留言</a></li>
-          <li><a href="#">关于</a></li>
-        </ul>
-      </div>
+<%- include('public/navber'); %>
 
-    </nav>
-  </div>
-</div>
 
-<div class="logo text-center">
-  <h1>bootstrap blog</h1>
-  <p>I'm very vegetable and very poor.</p>
-</div>
+<%- include('public/logo'); %>
 
 <main id="main" class="container">
 

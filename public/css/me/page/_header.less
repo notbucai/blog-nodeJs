@@ -68,3 +68,77 @@
     // width: 800px;
   }
 }
+
+.navbar-me-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 50px;
+  line-height: 50px;
+  margin-right: 15px;
+  >a {
+    color: #ddd;
+    font-weight: bold;
+  }
+}
+
+#you {
+  text-align: center;
+  width: 160px;
+  height: 100%;
+  line-height: 1;
+  &:hover .u_action {
+    display: block;
+  }
+  .u_img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 1;
+    margin-top: 8px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .u_action {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0; // padding: 15px 15px 0;
+    padding-top: 6px;
+    overflow: hidden;
+    width: 100%;
+    >div {
+      overflow: hidden;
+      background-color: #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+      >p {
+        margin: 10px 0;
+        overflow: hidden;
+        padding: 0;
+        line-height: 1.4;
+        >a {
+          position: relative;
+          color: #000;
+          display: block;
+          font-size: 15px;
+          padding: 5px 0;
+          >.glyphicon {
+            margin-left: 15px;
+            color: #51aded;
+            position: absolute;
+            left: 0;
+            top: 6px;
+          }
+        }
+        &:last-child {
+          padding-top: 8px;
+          border-top: 1px solid #eee;
+        }
+      }
+    }
+  }
+}
