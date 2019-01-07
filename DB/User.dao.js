@@ -76,8 +76,9 @@ module.exports = User;
 
 
 // const user = new User({
-//   u_name: "123123",
-//   u_email: "123123",
+//   u_name: "bucai",
+//   u_pwd: "40d628dc4880d42b93972c1e640d301b",
+//   u_email: "1234@qq.com",
 //   is_admin: true,
 // });
 

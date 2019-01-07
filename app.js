@@ -27,7 +27,8 @@ app.use(session({
 
 app.use(async (ctx, next) => {
   ctx.state = {
-    title: "不才's blog"
+    title: "不才's blog",
+    user: ctx.session.user
   };
   await next();
 });

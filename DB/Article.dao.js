@@ -53,13 +53,30 @@ const Schema = mongoose.Schema({
   }
 });
 
+Schema.static('page',async function (p_id, index, pageSize = 10) {
+  const whele = {};
+  let Count = index * pageSize;
+
+  if (p_id) {
+    whele.p_id = p_id;
+  }
+
+  return await this.find(whele)
+    .sort({_id:-1})
+    .limit(pageSize)
+    .skip(Count);
+});
+
 const Articles = mongoose.model('Article', Schema);
 
 module.exports = Articles;
+
+
+
 // const article = new Articles({
-//   title: "**测试===",
-//   content: "1231231",
-//   info: "99999",
+//   title: "新的文章",
+//   content: "22873",
+//   info: "测试简介lll123×&%￥%……&×（）家的沙发上",
 // });
 
 // article.save().then((e, d) => {
