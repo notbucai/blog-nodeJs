@@ -16,7 +16,16 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
     unique: true
+  },
+  is_part: {
+    type: Boolean,
+    default: true
   }
+});
+
+Schema.static('getNavs', async function () {
+
+  return await this.find({});
 
 });
 
@@ -24,16 +33,15 @@ const Part = mongoose.model('Part', Schema);
 
 module.exports = Part;
 
-// const user = new User({
-//   u_name: "123123",
-//   u_email: "123123",
-//   is_admin: true,
+// const part = new Part({
+//   title:"分类er",
+//   url:"vbvb"
 // });
 
-// user.save().then((a)=>{
+// part.save().then((a)=>{
 //   console.log(a);
 // });
 
-Part.find().then((a) => {
-  console.log(a);
-});
+// part.find().then((a) => {
+//   console.log(a);
+// });

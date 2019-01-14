@@ -1,0 +1,34 @@
+<div class="widget tabs">
+  <ul class="row tab-ul" id="tabul">
+    <li class="col-md-6 active">最新文章</li>
+    <li class="col-md-6">热门文章</li>
+  </ul>
+  <ul class="tab-content" id="tabcontent">
+    <li class="active">
+      <ul class="tab-item">
+        <% newArticles && newArticles.forEach(function(article){ %>
+
+        <li>
+          <a href="/article/<%=article._id%>">
+            <%=article.title%></a>
+        </li>
+
+        <%});%>
+      </ul>
+    </li>
+    <li>
+      <ul class="tab-item">
+        <!-- hotArticles -->
+        <% hotArticles && hotArticles.forEach(function(article){ %>
+
+        <li>
+          <a href="/article/<%=article._id%>">
+            <%=article.title%></a>
+        </li>
+        
+        <%});%>
+
+      </ul>
+    </li>
+  </ul>
+</div>

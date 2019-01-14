@@ -8,6 +8,10 @@ const path = require('path');
 const routes = require('./Middleware/routes');
 const Store = require("./Middleware/Store");
 
+
+const initFilters = require("./filters/init");
+
+
 const port = 3188;
 
 const app = new Koa();
@@ -25,13 +29,7 @@ app.use(session({
   maxAge: 2 * 60 * 60 * 1000
 }));
 
-app.use(async (ctx, next) => {
-  ctx.state = {
-    title: "不才's blog",
-    user: ctx.session.user
-  };
-  await next();
-});
+app.use(initFilters());
 
 app.use(bodyparser());
 

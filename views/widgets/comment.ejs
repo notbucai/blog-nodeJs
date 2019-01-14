@@ -1,0 +1,26 @@
+<div class="widget comment">
+  <header>
+    <h4 class="title">最近评论</h4>
+  </header>
+  <main>
+    <ul class="recentcomments">
+      <% newComments && newComments.forEach(function(comment){ %>
+      <li class="comment-item">
+        <div class="comment-img">
+          <!-- <img data-src="holder.js/50x50?auto=yes&theme=industrial&text=IMG" alt=""> -->
+          <img src="<%=comment.user&&comment.user.u_img || 'https://acg.moedragon.com/api.php?size=square&1146840&'+(Math.random()*10000 |0)%>"
+            alt="">
+        </div>
+        <div class="comment-detail">
+          <p class="comment-name">
+            <%=comment.user&&comment.user.u_name || '匿名'%> <samp>评论于
+              <a href="/article/<%=comment.article && comment.article._id || '#'%>"><%=comment.article && comment.article.title || "none"%></a></samp></p>
+          <p class="comment-content">
+            <%=comment.content%>
+          </p>
+        </div>
+      </li>
+      <% }); %>
+    </ul>
+  </main>
+</div>

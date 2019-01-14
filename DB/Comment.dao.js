@@ -39,20 +39,63 @@ const Schema = mongoose.Schema({
   },
 });
 
+
+Schema.static('newComments', async function (cLen = 6) {
+
+  return await this.aggregate([
+    {
+      $sort: { _id: -1 }
+    },
+    {
+      $limit: cLen
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "u_id",
+        foreignField: "_id",
+        as: "user"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$user",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+    {
+      $lookup: {
+        from: "articles",
+        localField: "a_id",
+        foreignField: "_id",
+        as: "article"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$article",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+  ]);
+
+});
+
+
 const Comment = mongoose.model('Comment', Schema);
 
 module.exports = Comment;
 
-// const user = new User({
-//   u_name: "123123",
-//   u_email: "123123",
-//   is_admin: true,
+// const c = new Comment({
+//   u_id:mongoose.Types.ObjectId("5c34ac3d73b5db0ad42f5bbf"),
+//   a_id:mongoose.Types.ObjectId("5c36136216545566c8de7f56"),
+//   content:"测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦",
 // });
 
-// user.save().then((a)=>{
+// c.save().then((a)=>{
 //   console.log(a);
 // });
 
-Comment.find().then((a) => {
-  console.log(a);
-});
+// Comment.find().then((a) => {
+//   console.log(a);
+// });
