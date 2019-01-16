@@ -1,4 +1,5 @@
 <%- include('public/header',{title:title+"测试"}); %>
+<%- include('public/info_modal') %>
 
 <div id="sform">
 
@@ -22,7 +23,7 @@
       </div>
 
       <div class="form-box">
-        <input type="text" class="input" placeholder="验证码" name="code" maxlength="6">
+        <input type="number" class="input" placeholder="验证码" name="code" maxlength="6">
         <p class="form-info">错误信息显示</p>
         <div class="code" id="code">
           <span>获取验证码</span>
@@ -36,7 +37,7 @@
     </form>
     <div class="form-o">
       <div>
-        <a href="/">← 返回到犬's Blog</a>
+        <a href="/">← 返回到<%=title%></a>
       </div>
       <div>
         <a href="/login">登录</a>

@@ -1,5 +1,4 @@
 const User = require("../DB/User.dao");
-var crypto = require('crypto')
 
 async function get_fun(ctx, next) {
 
@@ -25,10 +24,9 @@ async function post_fun(ctx, next) {
       res.msg = "参数错误";
     }
 
-    const md5 = crypto.createHash('md5');
-    const md5_res = md5.update(u_pwd).digest('hex')
+    const user = new User({ u_name: u_login, u_email: u_login, u_pwd });
 
-    const login_res_user = await User.login(u_login, md5_res);
+    const login_res_user = await User.login(user);
 
     // 查询数据库登陆
 
@@ -43,6 +41,7 @@ async function post_fun(ctx, next) {
 
   } catch (error) {
     console.error(error);
+    res.msg = error.message || error;
   }
 
   ctx.body = {

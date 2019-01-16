@@ -1,4 +1,5 @@
 const mongoose = require('./dbUtlis.js');
+const { md5 } = require('../utils/cryptoUrils');
 /*
 {
 	_id:ObjectId,
@@ -21,12 +22,14 @@ const Schema = mongoose.Schema({
   u_pwd: {
     type: String,
     required: true,
-    maxlength: 32,
-    minlength: 32,
+    set: md5,
+    // get: md5
   },
   u_email: {
     type: String,
-    unique: true
+    unique: true,
+    set: decodeURIComponent,
+    // get: decodeURI
   },
   u_img: { // 用户头像
     type: String,
@@ -55,38 +58,37 @@ const Schema = mongoose.Schema({
 });
 
 
-Schema.static('login', async function (u_login, u_pwd) {
+Schema.static('login', async function (doc) {
   // console.log(u_login, u_pwd);
+  // console.log(doc);
 
   const db_res = await this.find({
     $or: [
-      { u_name: u_login }, { u_email: u_login }
+      { u_name: doc.u_name }, { u_email: doc.u_email }
     ],
-    u_pwd
+    u_pwd: doc.u_pwd
   });
 
   return db_res && db_res.length && db_res[0];
 
 });
 
-Schema.static('reg', async function ({ u_email,
-  u_name,
-  u_pwd }) {
+Schema.static('reg', async function (doc) {
   // console.log(u_login, u_pwd);
 
-  const result = {
-    code: -1
-  };
+  const { u_name, u_email } = doc;
 
-  const may_user = this.findOne({ $or: { u_name, u_email } });
+  const may_user = await this.findOne({ $or: [{ u_name }, { u_email }] });
 
-  console.log(may_user);
+  // console.log(may_user);
 
   if (may_user) {
 
+    return false;
   }
+  await doc.save();
 
-  return result;
+  return true;
 
 });
 

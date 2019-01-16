@@ -73,7 +73,7 @@
         let errmsg = "格式不正确";
         switch (name) {
             case "u_email":
-                reg = /[@]|\%40/;
+                reg = /([@]|\%40)[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
                 break;
             case "u_name":
                 reg = /(^.{4,20}$)/;
@@ -130,8 +130,9 @@
                     $("#info_modal").modal("show").find(".modal-content").text(msg);
 
                     if (code == 200) {
-                        window.location.href = "/";
-                        return;
+                        setTimeout(() => {
+                            window.location.href = "/";
+                        }, 600);
                     }
 
                     $("input[name=u_pwd]").val("").addClass('animated rubberBand err');
@@ -165,7 +166,7 @@
                 $(this).removeClass('animated rubberBand err');
                 $(this).addClass('err').addClass('animated rubberBand err').parents('.form-box').find(".form-info").text(res.errmsg).show();
             }
-        }, 300);
+        }, 400);
 
     });
 
