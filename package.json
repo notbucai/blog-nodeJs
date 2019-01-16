@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node app.js"
+    "dev": "nodemon app.js"
   },
   "author": "1450941858@qq.com",
   "license": "ISC",
@@ -21,5 +21,8 @@
     "mongodb": "^3.1.10",
     "mongolass": "^4.4.1",
     "mongoose": "^5.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }

@@ -33,6 +33,6 @@ module.exports = TagMap;
 //   console.log(a);
 // });
 
-TagMap.find().then((a) => {
-  console.log(a);
-});
+// TagMap.find().then((a) => {
+//   console.log(a);
+// });

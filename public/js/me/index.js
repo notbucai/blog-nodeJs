@@ -139,7 +139,7 @@
                 },
                 error: function (xhr, status, error) {
                     $("#info_modal").modal("show").find(".modal-content").text(error);
-                    console.error(xhr, status, error);
+                    console.log(xhr, status, error);
                 },
 
             });

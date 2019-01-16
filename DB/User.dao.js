@@ -69,6 +69,27 @@ Schema.static('login', async function (u_login, u_pwd) {
 
 });
 
+Schema.static('reg', async function ({ u_email,
+  u_name,
+  u_pwd }) {
+  // console.log(u_login, u_pwd);
+
+  const result = {
+    code: -1
+  };
+
+  const may_user = this.findOne({ $or: { u_name, u_email } });
+
+  console.log(may_user);
+
+  if (may_user) {
+
+  }
+
+  return result;
+
+});
+
 const User = mongoose.model('User', Schema);
 
 

@@ -10,10 +10,12 @@
 
   <div class="row">
     <div class="col-md-8">
-      <!-- <div class="hentry">
-        <h1>分类：<span>原创</span></h1>
+      <%if(part && part._id){%>
+      <div class="hentry">
+        <h1>分类：<span><%=part.title%></span></h1>
         <p>原创内容，转载还请注明</p>
-      </div> -->
+      </div>
+      <%}%>
       <% articles.forEach(function(article){ %>
       <article class="article">
         <main class="content row">
@@ -50,52 +52,8 @@
       </article>
       <% }); %>
 
-      <nav aria-label="Page navigation" class="text-center">
-        <ul class="pagination">
+      <%-include('public/navigation')%>
 
-          <% if(page_index>0){ %>
-          <li>
-            <a href="/page/<%=page_index%>" aria-label="Previous">
-              <!-- <span aria-hidden="true">&laquo;</span> -->
-              <span aria-hidden="true">&lt;</span>
-            </a>
-          </li>
-          <% } %>
-
-
-          <!-- <%=page_size%> -->
-          <!-- <%=page_index%> -->
-
-          <!-- <% for(var i=page_index;i>=0;i--){ %>
-          <li class="<%=i==page_index && 'active' || ''%>"><a href="/page/<%=i+1%>">
-              <%=i+1%></a></li>
-          <% } %> -->
-
-
-          <% for(var i=pag_nav_o.stat;i<pag_nav_o.end;i++){ %>
-
-          <li class="<%=i==page_index && 'active' || ''%>"><a href="/page/<%=i+1%>">
-              <%=i+1%></a></li>
-
-          <% } %>
-
-          <!-- <% for(var i=page_index-5<0?0:page_index-5;i<page_size;i++){ %>
-          <li class="<%=i==page_index && 'active' || ''%>"><a href="/page/<%=i+1%>">
-              <%=i+1%></a></li>
-          <% } %> -->
-
-
-          <% if(page_index < page_size - 1){ %>
-          <li>
-            <a href="/page/<%=page_index + 2%>" aria-label="Next">
-              <!-- <span aria-hidden="true">&raquo;	&lt;</span> -->
-              <span aria-hidden="true">&gt;</span>
-            </a>
-          </li>
-          <%}%>
-
-        </ul>
-      </nav>
     </div>
 
     <div class="col-md-4">

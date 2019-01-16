@@ -29,6 +29,12 @@ Schema.static('getNavs', async function () {
 
 });
 
+Schema.static('getNav', async function (part_url) {
+
+  return await this.findOne({ url: part_url });
+
+});
+
 const Part = mongoose.model('Part', Schema);
 
 module.exports = Part;

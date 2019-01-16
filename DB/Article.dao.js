@@ -60,7 +60,7 @@ const Schema = mongoose.Schema({
 Schema.static('page', async function (p_id, index, pageSize = 10) {
   const whele = {};
   let Count = index * pageSize;
-  console.log(Count);
+  // console.log(Count);
 
   if (p_id) {
     whele.p_id = p_id;
@@ -132,14 +132,16 @@ Schema.static('page', async function (p_id, index, pageSize = 10) {
         part: 1
       }
     }
-  ])
+  ]);
 
 
 });
 
-Schema.static('page_size', async function (pageLen = 10) {
-  const page_size = (((await this.countDocuments()) / pageLen) + 1) | 0;
+Schema.static('page_size', async function ($where = {},pageLen = 10) {
 
+
+  const page_size = (((await this.countDocuments($where)) / pageLen) + 1) | 0;
+  
   return page_size;
 
 });
@@ -163,20 +165,22 @@ module.exports = Articles;
 
 
 
-// for (let index = 0; index < 100; index++) {
-//   const article = new Articles({
-//     title: index+" 空气质量“良”，也是一种伤害？",
-//     content:index+ "昨天（1月4日），收到了一个好消息：2018年北京的空气比往年好了不少。根据北京市生态环境局发布的数据，2018年北京全市细颗粒物PM2",
-//     info: ".5年均浓度51微克/立方米，比2017年同比下降12.1%，二氧化硫、二氧化氮和可吸入颗粒物（PM10）的数据也有改善。",
-//     u_id: mongoose.Types.ObjectId("5c34ac3d73b5db0ad42f5bbf"),
-//     p_id: mongoose.Types.ObjectId("5c381472f8f7b327508b46b5")
-//   });
-
-//   article.save().then((e, d) => {
-//     console.log(e, d);
-//   });
-
-// }
+// setTimeout(() => {
+//   for (let index = 0; index < 40; index++) {
+//     const article = new Articles({
+//       title: index+" 新的 new Article Yes!!!",
+//       content:index+ "新的 NWE INFO OOOOO!",
+//       info: "文章内容",
+//       u_id: mongoose.Types.ObjectId(["5c3cca8bde5fd316cdbe63fb"][0]),
+//       p_id: mongoose.Types.ObjectId(["5c3ccb4702486416f52870d8","5c3ccb2532fa2b16ed20c5a2","5c3ccad04d346916e5c1983c"][Math.random()*3|0])
+//     });
+  
+//     article.save().then((e, d) => {
+//       console.log(e, d);
+//     });
+  
+//   }
+// }, 1000);
 
 // Articles.find().then((e, d) => {
 //   console.log(e, d);

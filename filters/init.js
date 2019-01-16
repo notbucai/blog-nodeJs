@@ -19,7 +19,7 @@ module.exports = function () {
 
     // hotArticles
 
-    console.log(navs);
+    // console.log(navs);
 
     ctx.state = {
       ...init,

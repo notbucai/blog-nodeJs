@@ -87,8 +87,8 @@ const Comment = mongoose.model('Comment', Schema);
 module.exports = Comment;
 
 // const c = new Comment({
-//   u_id:mongoose.Types.ObjectId("5c34ac3d73b5db0ad42f5bbf"),
-//   a_id:mongoose.Types.ObjectId("5c36136216545566c8de7f56"),
+//   u_id:mongoose.Types.ObjectId("5c3cca8bde5fd316cdbe63fb"),
+//   a_id:mongoose.Types.ObjectId("5c3d375ca646331871b89820"),
 //   content:"测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦测试评论啦啦啦",
 // });
 
