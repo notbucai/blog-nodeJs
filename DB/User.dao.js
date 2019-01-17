@@ -60,7 +60,7 @@ const Schema = mongoose.Schema({
 
 Schema.static('login', async function (doc) {
   // console.log(u_login, u_pwd);
-  // console.log(doc);
+  console.log(doc.u_email,doc.u_name,doc.u_pwd);
 
   const db_res = await this.find({
     $or: [
@@ -68,11 +68,17 @@ Schema.static('login', async function (doc) {
     ],
     u_pwd: doc.u_pwd
   });
-
-  return db_res && db_res.length && db_res[0];
+  console.log(db_res);
+  
+  return !!db_res;
 
 });
-
+// db.users.find({
+//   $or:[
+//     {u_name:'1450941858%40qq.com'},{u_email:"1450941858@qq.com"}
+//   ],
+//   u_pwd:"40d628dc4880d42b93972c1e640d301b"
+// }).pretty()
 Schema.static('reg', async function (doc) {
   // console.log(u_login, u_pwd);
 

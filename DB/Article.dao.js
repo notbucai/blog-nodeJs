@@ -137,11 +137,11 @@ Schema.static('page', async function (p_id, index, pageSize = 10) {
 
 });
 
-Schema.static('page_size', async function ($where = {},pageLen = 10) {
+Schema.static('page_size', async function ($where = {}, pageLen = 10) {
 
 
-  const page_size = (((await this.countDocuments($where)) / pageLen) + 1) | 0;
-  
+  const page_size = Math.ceil(((await this.countDocuments($where)) / pageLen));
+
   return page_size;
 
 });
@@ -158,6 +158,60 @@ Schema.static('hotArticles', async function (aLen = 6) {
 
 });
 
+Schema.static('OneArticle', async function (_id) {
+
+  const currendArticle = await this.aggregate([
+    {
+      $match: {
+        _id: mongoose.Types.ObjectId(_id)
+      }
+    },
+    {
+      $lookup: { // 左连接
+        from: "users", // 关联到order表
+        localField: "u_id", // user 表关联的字段
+        foreignField: "_id", // order 表关联的字段
+        as: "user"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$user",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+
+    {
+      $lookup: { // 左连接
+        from: "parts", // 关联到order表
+        localField: "p_id", // user 表关联的字段
+        foreignField: "_id", // order 表关联的字段
+        as: "part"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$part",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+
+    {
+      $lookup: { // 左连接
+        from: "comments", // 关联到order表
+        localField: "_id", // user 表关联的字段
+        foreignField: "a_id", // order 表关联的字段
+        as: "comments"
+      }
+    },
+    {
+      $limit: 1
+    }
+  ]);
+
+  return currendArticle && currendArticle.length && currendArticle[0];
+
+});
 
 const Articles = mongoose.model('Article', Schema);
 
@@ -171,14 +225,14 @@ module.exports = Articles;
 //       title: index+" 新的 new Article Yes!!!",
 //       content:index+ "新的 NWE INFO OOOOO!",
 //       info: "文章内容",
-//       u_id: mongoose.Types.ObjectId(["5c3cca8bde5fd316cdbe63fb"][0]),
-//       p_id: mongoose.Types.ObjectId(["5c3ccb4702486416f52870d8","5c3ccb2532fa2b16ed20c5a2","5c3ccad04d346916e5c1983c"][Math.random()*3|0])
+//       u_id: mongoose.Types.ObjectId(["5c3ff208125d840a880054ab"][0]),
+//       p_id: mongoose.Types.ObjectId(["5c4031b2587dd10e75897266","5c40319b68d3330e6be75ced"][Math.random()*3|0])
 //     });
-  
+
 //     article.save().then((e, d) => {
 //       console.log(e, d);
 //     });
-  
+
 //   }
 // }, 1000);
 

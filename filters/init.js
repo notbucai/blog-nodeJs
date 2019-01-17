@@ -1,13 +1,15 @@
 const Comment = require('../DB/Comment.dao');
 const Article = require('../DB/Article.dao');
 const Part = require('../DB/Part.dao');
+const { time2DateStr } = require('../utils/TimeTools');
 
 
 module.exports = function () {
 
   const init = {
     title: "不才's blog",
-    introduction: "啥也不会 -不才"
+    introduction: "啥也不会 -不才",
+    time2DateStr
   }
 
   return async function (ctx, next) {
@@ -27,7 +29,7 @@ module.exports = function () {
       newComments,
       newArticles,
       hotArticles,
-      navs
+      navs,
     };
     await next();
   }

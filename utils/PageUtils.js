@@ -8,8 +8,9 @@ function getPageLen(c_len, a_len, n_len = 6) {
 
   let stat = c_len - qh < 0 ? 0 : c_len - qh;
 
-  let end = c_len + n_len - (c_len - stat) + 1 >= a_len ? a_len : c_len + n_len - (c_len - stat) + 1;
-
+  let end = c_len + n_len - (c_len - stat) > a_len ? a_len : c_len + n_len - (c_len - stat) ;
+  console.log(a_len);
+  
   return {
     stat,
     end

@@ -12,7 +12,8 @@
     <div class="col-md-8">
       <%if(part && part._id){%>
       <div class="hentry">
-        <h1>分类：<span><%=part.title%></span></h1>
+        <h1>分类：<span>
+            <%=part.title%></span></h1>
         <p>原创内容，转载还请注明</p>
       </div>
       <%}%>
@@ -27,8 +28,19 @@
           </div>
           <div class="detail col-md-8">
             <div class="detail-title">
-              <span class="part hidden-xs"><a href="/part/<%=article.part && article.part.url || '/'%>">
-                  <%=article.part && article.part.title || "未分类"%></a></span>
+
+              <span class="part hidden-xs">
+
+                <%if(article.part && article.part.url){%>
+                <a href="/part/<%=article.part && article.part.url || 'none'%>">
+                  <%=article.part && article.part.title || "未分类"%></a>
+                <%}else{%>
+                <a href="/">
+                  <%="未分类"%></a>
+
+                <%}%>
+              </span>
+
               <h3 class="title"><a href="/article/<%=article._id%>">
                   <%=article.title%></a></h3>
             </div>
@@ -75,20 +87,9 @@
 
 </main>
 
-<footer id="copyandinfo">
-  <p>&copy; 2018 <a href="">不才、blog</a>. ALL RIGHTS RESERVED. | 本站已运行<span>1111天07小时45分钟44秒</span></p>
-</footer>
+<%-include('public/copy')%>
 
-<div id="actions">
-  <div class="backtop black">
-    <i class="glyphicon glyphicon-chevron-up"></i>
-  </div>
-  <div class="search black">
-    <i class="glyphicon glyphicon-search"></i>
-    <form class="search-form">
-      <input type="text" name="search" placeholder="请输入搜索内容">
-    </form>
-  </div>
-</div>
+<%-include('public/actions')%>
+
 
 <%- include('public/footer'); %>

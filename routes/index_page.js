@@ -1,5 +1,4 @@
 const path = require('path');
-const { time2DateStr } = require('../utils/TimeTools');
 const { getPageArgs } = require('../utils/PageUtils');
 
 
@@ -9,7 +8,6 @@ async function get_fun_index(ctx, next) {
   // render 默认使用 state 中的属性 且如果 state中有参数就不再取传递的参数
   await ctx.render('index', {
     ...await getPageArgs(null, page_index),
-    time2DateStr,
   });
 
 }
@@ -29,7 +27,6 @@ async function get_fun_page(ctx, next) {
     // render 默认使用 state 中的属性 且如果 state中有参数就不再取传递的参数
     await ctx.render('index', {
       ...await getPageArgs(null, page_index),
-      time2DateStr,
     });
 
   } catch (error) {

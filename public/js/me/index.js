@@ -58,7 +58,7 @@
         if (!iss) {
 
             const this_comment = $(this).text("取消回复").data('is', "true").parents('li').append(commentForm);
-            $('html , body').animate({ scrollTop: this_comment.offset().top - ($("#header").height()) }, 'slow');
+            $('html , body').animate({ scrollTop: this_comment.offset().top - ($("#header").height()) - 15 }, 'slow');
             commentForm.find('.form-textarea').focus();
 
         } else {
@@ -133,10 +133,11 @@
                         setTimeout(() => {
                             window.location.href = "/";
                         }, 600);
+                    } else {
+                        $("input[name=u_pwd]").val("").addClass('animated rubberBand err');
                     }
 
-                    $("input[name=u_pwd]").val("").addClass('animated rubberBand err');
-                    
+
                 },
                 error: function (xhr, status, error) {
                     $("#info_modal").modal("show").find(".modal-content").text(error);
@@ -193,21 +194,38 @@
             $(_this).html(`<span>正在获取</span>`);
 
             // 这里执行ajax
+            $.ajax({
+                type: "POST",
+                url: "/api/code",
+                data: JSON.stringify({ u_email: $("input[name=u_email]").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function ({ code, msg }) {
+                    $("#info_modal").modal("show").find(".modal-content").text(msg);
 
-            $(_this).html(`<span>获取成功</span>`);
-            $(_this).data("stat", "true");
-            let iii = 60;
-            const s_i = setInterval(() => {
+                    if (code != 200) {
+                        $(_this).html(`<span>获取失败</span>`);
 
-                $(_this).html(`<span>${iii--} S 后重新获取</span>`);
-                if (!iii) {
-                    clearInterval(s_i);
-                    $(_this).data("stat", null);
-                    $(_this).html(`<span>重新获取</span>`);
-                    return;
+                        return;
+                    }
+                    $(_this).html(`<span>获取成功</span>`);
+                    $(_this).data("stat", "true");
+                    let iii = 60;
+                    const s_i = setInterval(() => {
+
+                        $(_this).html(`<span>${iii--} S 后重新获取</span>`);
+                        if (!iii) {
+                            clearInterval(s_i);
+                            $(_this).data("stat", null);
+                            $(_this).html(`<span>重新获取</span>`);
+                            return;
+                        }
+
+                    }, 1000);
                 }
+            });
 
-            }, 1000);
+
         }
 
     });

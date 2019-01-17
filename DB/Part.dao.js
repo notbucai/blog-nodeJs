@@ -40,8 +40,8 @@ const Part = mongoose.model('Part', Schema);
 module.exports = Part;
 
 // const part = new Part({
-//   title:"分类er",
-//   url:"vbvb"
+//   title:"测试分类",
+//   url:"test"
 // });
 
 // part.save().then((a)=>{

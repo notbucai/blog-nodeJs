@@ -25,19 +25,31 @@ async function post_fun(ctx, next) {
 
     // TODO 这里 是留给 验证 code 的
 
-    if (!v_user_args({ u_email, u_name, u_pwd })) {
+    if (!v_user_args({ u_email, u_name, u_pwd, code })) {
+      ctx.code = 401;
       throw Error("参数错误，请检查！");
+    }
+
+    const { codeObj } = ctx.session;
+
+    if (!codeObj || Date.now() - codeObj.time > 5 * 60 * 1000) {
+      ctx.code = 504;
+      throw Error("验证码失效，请重新获取验证码");
+    }
+    if(codeObj.code != code){
+      ctx.code = 402;
+      throw Error("验证码不匹配，请重试");
     }
 
     const user = new User(req_body);
     console.log(user);
 
-    const reg_succeed= await User.reg(user);
+    const reg_succeed = await User.reg(user);
 
-    if(reg_succeed){
+    if (reg_succeed) {
       res.code = 200;
       res.msg = "注册成功";
-    }else{
+    } else {
       res.code = 502;
       res.msg = "该用户名或邮箱已被注册"
     }
