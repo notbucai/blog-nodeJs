@@ -17,6 +17,9 @@ const Schema = mongoose.Schema({
     required: true,
     unique: true
   },
+  info: {
+    type: String
+  },
   is_part: {
     type: Boolean,
     default: true

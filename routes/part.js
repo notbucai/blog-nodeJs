@@ -8,10 +8,10 @@ async function get_fun_index(ctx, next) {
   console.log(1);
   const part_name = path.basename(ctx.url);
   console.log(part_name);
-
+  const page_s = await getPageArgs(part_name, page_index);
   // render 默认使用 state 中的属性 且如果 state中有参数就不再取传递的参数
   await ctx.render('index', {
-    ...await getPageArgs(part_name, page_index),
+    ...page_s,
     time2DateStr,
   });
 

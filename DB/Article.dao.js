@@ -224,6 +224,78 @@ Schema.static('OneArticle', async function (_id) {
 
 });
 
+Schema.static('search', async function (key) {
+  const whele = {};
+
+  if (key) {
+    whele.title = {$regex:new RegExp(key)};
+  }
+
+  return await this.aggregate([
+    {
+      $match: whele
+    },
+    {
+      $sort: { _id: -1 }
+    },
+    {
+      $lookup: { // 左连接
+        from: "users", // 关联到order表
+        localField: "u_id", // user 表关联的字段
+        foreignField: "_id", // order 表关联的字段
+        as: "user"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$user",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+
+    {
+      $lookup: { // 左连接
+        from: "parts", // 关联到order表
+        localField: "p_id", // user 表关联的字段
+        foreignField: "_id", // order 表关联的字段
+        as: "part"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$part",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+
+    {
+      $lookup: { // 左连接
+        from: "comments", // 关联到order表
+        localField: "_id", // user 表关联的字段
+        foreignField: "a_id", // order 表关联的字段
+        as: "comments"
+      }
+    },
+    {
+      $project: {
+        comment_size: { $size: "$comments" },
+        _id: 1,
+        title: 1,
+        info: 1,
+        // content: 1,
+        // article_size: { $count: 1 },
+        user: 1,
+        add_time: 1,
+        a_img: 1,
+        hits: 1,
+        part: 1
+      }
+    }
+  ]);
+
+
+});
+
 const Articles = mongoose.model('Article', Schema);
 
 module.exports = Articles;

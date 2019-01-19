@@ -8,9 +8,9 @@ function getPageLen(c_len, a_len, n_len = 6) {
 
   let stat = c_len - qh < 0 ? 0 : c_len - qh;
 
-  let end = c_len + n_len - (c_len - stat) > a_len ? a_len : c_len + n_len - (c_len - stat) ;
+  let end = c_len + n_len - (c_len - stat) > a_len ? a_len : c_len + n_len - (c_len - stat);
   console.log(a_len);
-  
+
   return {
     stat,
     end
@@ -38,7 +38,7 @@ async function getPageArgs(part_url, page_index) {
 
   const page_size = await Article.page_size($where);
   console.log(page_size);
-  
+
   const pag_nav_show = getPageLen(page_index, page_size);
   // console.log(articles);
 
@@ -48,11 +48,41 @@ async function getPageArgs(part_url, page_index) {
     page_index,
     pag_nav_o: pag_nav_show,
     part,
-    part_url: part_url
+    isnavigation: true,
+    part_url: part_url,
+    subhead: part && part.title || null
+  }
+
+}
+
+/**
+ * 搜索
+ * @param {String} key 搜索的参数
+ */
+async function searchArticles(key) {
+
+
+  const articles = await Article.search(key);
+
+  // console.log(articles);
+
+  return {
+    articles,
+    page_size: null,
+    page_index: null,
+    pag_nav_o: null,
+    part: {
+      title: key,
+      info: key + " 的搜索结果"
+    },
+    part_url: null,
+    isnavigation: false,
+    subhead: key + "的搜索结果"
   }
 
 }
 
 module.exports = {
-  getPageArgs
+  getPageArgs,
+  searchArticles
 }

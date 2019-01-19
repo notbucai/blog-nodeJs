@@ -1,5 +1,8 @@
-<%- include('public/header',{title:title}); %>
-
+<%if(subhead){%>
+<%- include('public/header',{title:subhead+" - "+title}); %>
+<%}else{%>
+<%- include('public/header'); %>
+<%}%>
 
 <%- include('public/navber'); %>
 
@@ -10,11 +13,15 @@
 
   <div class="row">
     <div class="col-md-8">
-      <%if(part && part._id){%>
+      <%if(part){%>
       <div class="hentry">
         <h1>分类：<span>
             <%=part.title%></span></h1>
-        <p>原创内容，转载还请注明</p>
+        <%if(part&&part.info){%>
+        <p>
+          <%=part.info%>
+        </p>
+        <%}%>
       </div>
       <%}%>
       <% articles.forEach(function(article){ %>
@@ -63,13 +70,13 @@
         </footer>
       </article>
       <% }); %>
-
+      <%if(isnavigation){%>
       <%-include('public/navigation')%>
-
+      <%}%>
     </div>
 
     <div class="col-md-4">
-      
+
       <%-include('widgets/me')%>
 
       <%-include('widgets/comment')%>
