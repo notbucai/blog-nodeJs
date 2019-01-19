@@ -32,80 +32,13 @@
     </div>
 
     <div class="col-md-4">
-      <div class="widget auto">
-        <header class="bg"></header>
-        <main class="info">
-          <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1450941858&spec=100" width="80" height="80" alt="">
-          <p>咦？我是谁？我为什么会在这？<a href="">[关于]</a></p>
-        </main>
-      </div>
-      <div class="widget comment">
-        <header>
-          <h4 class="title">最近评论</h4>
-        </header>
-        <main>
-          <ul class="recentcomments">
-            <li class="comment-item">
-              <div class="comment-img">
-                <img data-src="holder.js/50x50?auto=yes&theme=industrial&text=IMG" alt="">
-              </div>
-              <div class="comment-detail">
-                <p class="comment-name">泥嚎 <samp>评论于<a href="">RabbitMQ-基础</a></samp></p>
-                <p class="comment-content">我觉得狗狗说得对。 写前端连edge html都懒得适配了...</p>
-              </div>
-            </li>
-            <li class="comment-item">
-              <div class="comment-img">
-                <img data-src="holder.js/50x50?auto=yes&theme=lava&text=IMG" alt="">
-              </div>
-              <div class="comment-detail">
-                <p class="comment-name">二点五次元的博客 <samp>评论于<a href="">RabbitMQ-基础</a></samp></p>
-                <p class="comment-content">大佬大佬。。今天登陆wordpress后台 进仪表盘没停留两...</p>
-              </div>
-            </li>
-            <li class="comment-item">
-              <div class="comment-img">
-                <img data-src="holder.js/50x50?auto=yes&theme=sky&text=IMG" alt="">
-              </div>
-              <div class="comment-detail">
-                <p class="comment-name">HK <samp>评论于<a href="">RabbitMQ-基础</a></samp></p>
-                <p class="comment-content">霸气回应</p>
-              </div>
-            </li>
-            <li class="comment-item">
-              <div class="comment-img">
-                <img data-src="holder.js/50x50?auto=yes&theme=vine&text=IMG" alt="">
-              </div>
-              <div class="comment-detail">
-                <p class="comment-name">无路赛 <samp>评论于<a href="">RabbitMQ-基础</a></samp></p>
-                <p class="comment-content">我觉得狗狗说得对。 写前端连edge html都懒得适配了...</p>
-              </div>
-            </li>
-          </ul>
-        </main>
-      </div>
-      <div class="widget tabs">
-        <ul class="row tab-ul" id="tabul">
-          <li class="col-md-6 active">最新文章</li>
-          <li class="col-md-6">热门文章</li>
-        </ul>
-        <ul class="tab-content" id="tabcontent">
-          <li class="active">
-            <ul class="tab-item">
-              <li><a href="">APlayer，启动 !</a></li>
-              <li><a href="">文章内容的展开/收缩功能</a></li>
-              <li><a href="">使用 KMS 激活 Microsoft 产品</a></li>
-              <li><a href="">365天成就达成！</a></li>
-            </ul>
-          </li>
-          <li>
-            <ul class="tab-item">
-              <li><a href="">筑梦量行，六年坚持</a></li>
-              <li><a href="">Win下使用acme.sh申请let's encrypt野卡(附续期)</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+      
+      <%-include('widgets/me')%>
+
+      <%-include('widgets/comment')%>
+
+      <%-include('widgets/tabs')%>
+
     </div>
 
   </div>
@@ -115,5 +48,8 @@
 <%-include('public/copy')%>
 
 <%-include('public/actions')%>
+<%-include('public/info_modal')%>
+
+
 
 <%- include('public/footer'); %>

@@ -61,10 +61,119 @@
             $('html , body').animate({ scrollTop: this_comment.offset().top - ($("#header").height()) - 15 }, 'slow');
             commentForm.find('.form-textarea').focus();
 
+            $("#r_u_id").val($(this).data("u_id"));
+            // console.log($(this).data("u_id"));
+
         } else {
+
+            $("#r_u_id").val("");
             $("#commentContainer").append(commentForm);
 
         }
+
+    });
+
+    $("#comment_login").submit(function (e) {
+        e.preventDefault();
+        const data = $(this).serialize();
+
+        try {
+            const dataForm_Arr = data.split('&');
+            const dataForm = {};
+            for (const item of dataForm_Arr) {
+                const s = item.split("=");
+                const name = $.trim(s[0]),
+                    value = decodeURI($.trim(s[1]));
+                dataForm[name] = value;
+            }
+            console.log(JSON.stringify(dataForm));
+            if (!dataForm.u_login || !dataForm.u_pwd) {
+                $("#info_modal").modal("show").find(".modal-content").text("都不能为空");
+                return;
+            }
+            // ajax
+            const api = $(this).attr("action");
+            $.ajax({
+                type: "POST",
+                url: api,
+                data: JSON.stringify(dataForm),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function ({ code, msg }) {
+
+                    $("#info_modal").modal("show").find(".modal-content").text(msg);
+                    if (code == 200) {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 600);
+                    }
+                    //    console.log(msg,code);
+
+                },
+                error: function (xhr, status, error) {
+                    $("#info_modal").modal("show").find(".modal-content").text(error);
+                    console.log(xhr, status, error);
+                },
+
+            });
+
+        } catch (error) {
+            console.error(error);
+
+        }
+
+    });
+
+    $("#comment_o").submit(function (e) {
+
+        e.preventDefault();
+        const data = $(this).serialize();
+
+        try {
+            const dataForm_Arr = data.split('&');
+            const dataForm = {};
+            for (const item of dataForm_Arr) {
+                const s = item.split("=");
+                const name = $.trim(s[0]),
+                    value = decodeURI($.trim(s[1]));
+                dataForm[name] = value;
+            }
+            console.log(JSON.stringify(dataForm));
+            if (!dataForm.content) {
+                $("#info_modal").modal("show").find(".modal-content").text("不能为空");
+                return;
+            }
+            // ajax
+            const api = $(this).attr("action");
+            $.ajax({
+                type: "POST",
+                url: api,
+                data: JSON.stringify(dataForm),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function ({ code, msg }) {
+
+                    $("#info_modal").modal("show").find(".modal-content").text(msg);
+                    if (code == 200) {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 600);
+                    }
+                    //    console.log(msg,code);
+
+                },
+                error: function (xhr, status, error) {
+                    $("#info_modal").modal("show").find(".modal-content").text(error);
+                    console.log(xhr, status, error);
+                },
+
+            });
+
+        } catch (error) {
+            console.error(error);
+
+        }
+
 
     });
 
@@ -118,10 +227,10 @@
             // console.log(JSON.stringify(dataForm));
 
             // ajax
-
+            const api = $(this).attr("action");
             $.ajax({
                 type: "POST",
-                url: $(this).attr("action"),
+                url: api,
                 data: JSON.stringify(dataForm),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
@@ -130,9 +239,17 @@
                     $("#info_modal").modal("show").find(".modal-content").text(msg);
 
                     if (code == 200) {
-                        setTimeout(() => {
-                            window.location.href = "/";
-                        }, 600);
+
+                        if (api.indexOf('login') != -1) {
+                            setTimeout(() => {
+                                window.location.href = "/";
+                            }, 600);
+                        } else if (api.indexOf('reg') != -1) {
+                            setTimeout(() => {
+                                window.location.href = "/login";
+                            }, 600);
+                        }
+
                     } else {
                         $("input[name=u_pwd]").val("").addClass('animated rubberBand err');
                     }

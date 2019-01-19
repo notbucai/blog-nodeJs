@@ -21,11 +21,11 @@ async function post_fun(ctx, next) {
 
     if (!u_login || !u_pwd) {
       res.code = 401;
-      res.msg = "参数错误";
+      throw Error("参数错误");
     }
 
     const user = new User({ u_name: u_login, u_email: u_login, u_pwd });
-    console.log(user);
+    // console.log(user);
     
     const login_res_user = await User.login(user);
 
@@ -37,7 +37,7 @@ async function post_fun(ctx, next) {
       ctx.session.user = login_res_user;
     } else {
       res.code = 401;
-      res.msg = "账户或密码错误";
+      throw Error("账户或密码错误");
     }
 
   } catch (error) {

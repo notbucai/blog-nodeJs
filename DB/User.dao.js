@@ -22,7 +22,7 @@ const Schema = mongoose.Schema({
   u_pwd: {
     type: String,
     required: true,
-    set: md5,
+    // set: md5,
     // get: md5
   },
   u_email: {
@@ -60,17 +60,20 @@ const Schema = mongoose.Schema({
 
 Schema.static('login', async function (doc) {
   // console.log(u_login, u_pwd);
-  console.log(doc.u_email,doc.u_name,doc.u_pwd);
-
-  const db_res = await this.find({
-    $or: [
-      { u_name: doc.u_name }, { u_email: doc.u_email }
-    ],
-    u_pwd: doc.u_pwd
-  });
-  console.log(db_res);
+  console.log(doc.u_email, doc.u_name, doc.u_pwd);
+  console.log(typeof doc);
   
-  return !!db_res;
+  const db_res = await this.find({
+    u_pwd: md5(doc.u_pwd),
+    $or: [
+      { u_name: doc.u_name },
+      { u_email: doc.u_email }
+    ]
+  });
+
+  // console.log(db_res,await this.find({u_pwd:"wx123456"}));
+
+  return db_res && db_res.length && db_res[0];
 
 });
 // db.users.find({
@@ -92,6 +95,7 @@ Schema.static('reg', async function (doc) {
 
     return false;
   }
+  doc.u_pwd = md5(doc.u_pwd);
   await doc.save();
 
   return true;

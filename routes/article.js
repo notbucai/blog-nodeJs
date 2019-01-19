@@ -1,5 +1,6 @@
 const path = require('path');
 const Article = require('../DB/Article.dao');
+const Comment = require('../DB/Comment.dao');
 
 
 
@@ -10,15 +11,18 @@ async function get_fun(ctx, next) {
     const part_name = path.basename(ctx.url);
 
     const currendArticle = await Article.OneArticle(part_name);
-    console.log(currendArticle);
+    const a_idToComments = await Comment.a_idToComments(part_name);
+    // console.log(currendArticle);
+    // console.log(a_idToComments);
 
     // render 默认使用 state 中的属性 且如果 state中有参数就不再取传递的参数
     await ctx.render('article', {
-      currendArticle
+      currendArticle,
+      a_idToComments
     });
 
   } catch (error) {
-    ctx.redirect("/");    
+    ctx.redirect("/");
   }
 
 }

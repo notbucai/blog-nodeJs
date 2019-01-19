@@ -14,9 +14,10 @@
         <div class="comment-detail">
           <p class="comment-name">
             <%=comment.user&&comment.user.u_name || '匿名'%> <samp>评论于
-              <a href="/article/<%=comment.article && comment.article._id || '#'%>"><%=comment.article && comment.article.title || "none"%></a></samp></p>
+              <a href="/article/<%=comment.article && comment.article._id || '#'%>">
+                <%=comment.article && comment.article.title || "none"%></a></samp></p>
           <p class="comment-content">
-            <%=comment.content%>
+            <%=Buffer.from(comment.content,'base64').toString()%>
           </p>
         </div>
       </li>

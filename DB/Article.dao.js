@@ -195,7 +195,6 @@ Schema.static('OneArticle', async function (_id) {
         preserveNullAndEmptyArrays: true // 空的数组也拆分
       }
     },
-
     {
       $lookup: { // 左连接
         from: "comments", // 关联到order表
@@ -205,7 +204,19 @@ Schema.static('OneArticle', async function (_id) {
       }
     },
     {
-      $limit: 1
+      $project: {
+        comment_size: { $size: "$comments" },
+        _id: 1,
+        title: 1,
+        info: 1,
+        content: 1,
+        // article_size: { $count: 1 },
+        user: 1,
+        add_time: 1,
+        a_img: 1,
+        hits: 1,
+        part: 1
+      }
     }
   ]);
 
