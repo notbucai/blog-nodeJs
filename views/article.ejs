@@ -1,4 +1,4 @@
-<%- include('public/header',{title:title}); %>
+<%- include('public/header',{title:currendArticle.title+" - "+title}); %>
 
 
 <%- include('public/navber'); %>
@@ -11,7 +11,9 @@
     <div class="col-md-8">
       <div id="article">
         <header class="article-header">
-          <h1 class="article-title"><%=currendArticle && currendArticle.title || 'ERROR'%></h1>
+          <h1 class="article-title">
+            <%=currendArticle && currendArticle.title || 'ERROR'%>
+          </h1>
           <div class="article-info">
             <span><i class="glyphicon glyphicon-calendar"></i><samp>
                 <%=time2DateStr(currendArticle.add_time)%></samp></span>
@@ -32,7 +34,7 @@
     </div>
 
     <div class="col-md-4">
-      
+
       <%-include('widgets/me')%>
 
       <%-include('widgets/comment')%>

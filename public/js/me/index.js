@@ -248,6 +248,10 @@
                             setTimeout(() => {
                                 window.location.href = "/login";
                             }, 600);
+                        } else if (api.indexOf('repwd') != -1) {
+                            setTimeout(() => {
+                                window.location.href = "/login";
+                            }, 600);
                         }
 
                     } else {

@@ -62,7 +62,7 @@ Schema.static('login', async function (doc) {
   // console.log(u_login, u_pwd);
   console.log(doc.u_email, doc.u_name, doc.u_pwd);
   console.log(typeof doc);
-  
+
   const db_res = await this.find({
     u_pwd: md5(doc.u_pwd),
     $or: [
@@ -97,6 +97,29 @@ Schema.static('reg', async function (doc) {
   }
   doc.u_pwd = md5(doc.u_pwd);
   await doc.save();
+
+  return true;
+
+});
+
+Schema.static('repwd', async function (doc) {
+  // console.log(u_login, u_pwd);
+
+  const { u_email } = doc;
+
+  const may_user = await this.findOne({ u_email });
+
+  // console.log(may_user);
+
+  if (!may_user) {
+
+    return false;
+
+  }
+
+  may_user.u_pwd = md5(doc.u_pwd);
+
+  await doc.updateOne({u_email}, may_user);
 
   return true;
 

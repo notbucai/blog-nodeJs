@@ -1,0 +1,47 @@
+<%- include('public/header',{title:title+" - "+subhead}); %>
+<%- include('public/info_modal') %>
+
+<div id="sform">
+
+  <div class="form-con">
+    <h1>重置密码</h1>
+    <form action="/api/repwd" method="post" id="rl_form">
+
+      <div class="form-box">
+        <input type="text" class="input" autocomplete="off"  placeholder="邮箱" name="u_email">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <input type="number" class="input" autocomplete="off" placeholder="验证码" name="code" maxlength="6">
+        <p class="form-info">错误信息显示</p>
+        <div class="code" id="code">
+          <span>获取验证码</span>
+        </div>
+      </div>
+
+      <div class="form-box">
+        <input type="password" class="input" placeholder="新密码" name="u_pwd">
+        <p class="form-info">错误信息显示</p>
+      </div>
+
+      <div class="form-box">
+        <button type="submit">重置密码</button>
+      </div>
+
+    </form>
+    <div class="form-o">
+      <div>
+        <a href="/">← 返回到<%=title%></a>
+      </div>
+      <div>
+        <a href="/login">登录</a>
+        |
+        <a href="/reg">注册</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%- include('public/footer'); %>
