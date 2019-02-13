@@ -13,8 +13,6 @@
       <div id="nav" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-static-top">
 
-
-
           <li><a href="/">首页 <span class="sr-only">(current)</span></a></li>
 
           <% navs && navs.forEach(function(nav){ %>
@@ -47,9 +45,9 @@
           </div>
           <div class="u_action">
             <div>
-              <p><a href=""><span class="glyphicon glyphicon-comment"></span>消息</a></p>
+              <p><a href="/user/<%=user._id%>"><span class="glyphicon glyphicon-user"></span>个人中心</a></p>
               <p><a href="">
-                  <span class="glyphicon glyphicon-user"></span>个人资料</a></p>
+                  <span class="glyphicon glyphicon-cog"></span>设置</a></p>
               <p><a href="">
                   <span class="glyphicon glyphicon-off"></span>注销</a></p>
             </div>

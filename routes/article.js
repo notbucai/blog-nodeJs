@@ -12,8 +12,6 @@ async function get_fun(ctx, next) {
 
     const currendArticle = await Article.OneArticle(part_name);
     const a_idToComments = await Comment.a_idToComments(part_name);
-    // console.log(currendArticle);
-    // console.log(a_idToComments);
 
     // render 默认使用 state 中的属性 且如果 state中有参数就不再取传递的参数
     await ctx.render('article', {

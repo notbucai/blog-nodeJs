@@ -6,7 +6,6 @@ async function get_fun(ctx, next) {
   await ctx.render('login', {
     subhead: "登陆"
   });
-  console.log(ctx.session);
 
 }
 async function post_fun(ctx, next) {
@@ -25,7 +24,6 @@ async function post_fun(ctx, next) {
     }
 
     const user = new User({ u_name: u_login, u_email: u_login, u_pwd });
-    // console.log(user);
     
     const login_res_user = await User.login(user);
 

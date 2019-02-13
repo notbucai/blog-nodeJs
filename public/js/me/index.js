@@ -351,6 +351,32 @@
 
     });
 
+    $(".unfollowed").hover(function () {
+        $(this).addClass("unfollow").text("取消关注");
+    }, function () {
+        $(this).removeClass("unfollow").text("已关注");
+    });
+
+    $('.userinfoNavs').click(function (e) {
+        e.preventDefault();
+
+        if ($(e.target).prop('tagName') !== "LI")
+            return;
+
+        const index = $(this)
+            .children()
+            .removeClass('active')
+            .index(
+                $(e.target)
+                    .addClass('active')
+            );
+
+        $('.userinfoList > div')
+            .removeClass('active')
+            .eq(index)
+            .addClass('active');
+    });
+
 })(window);
 
 /**

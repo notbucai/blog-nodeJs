@@ -7,7 +7,6 @@ async function get_fun(ctx, next) {
   await ctx.render('reg', {
     subhead: "注册"
   });
-  // console.log(ctx.session);
 
 }
 async function post_fun(ctx, next) {
@@ -43,7 +42,6 @@ async function post_fun(ctx, next) {
     delete ctx.session.codeObj;
 
     const user = new User(req_body);
-    console.log(user);
 
     const reg_succeed = await User.reg(user);
 

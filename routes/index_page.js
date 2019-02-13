@@ -18,7 +18,6 @@ async function get_fun_page(ctx, next) {
   try {
 
     const page_index = Number(path.basename(ctx.url)) - 1;
-    // console.log(page);
 
     if (page_index < 0) {
       throw new Error("参数错误");

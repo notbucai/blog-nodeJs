@@ -9,3 +9,7 @@
 > 数据库： mongodb + redis 
 
 > JQuery + bootstrap + less
+
+## 使用
+
+> npm run dev  // 启动服务

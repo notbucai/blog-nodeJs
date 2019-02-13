@@ -7,7 +7,6 @@ async function get_fun(ctx, next) {
   await ctx.render('repwd', {
     subhead: "重置"
   });
-  // console.log(ctx.session);
 
 }
 async function post_fun(ctx, next) {
@@ -42,7 +41,7 @@ async function post_fun(ctx, next) {
     }
     
     const user = new User(req_body);
-    // console.log(user);
+
     delete ctx.session.codeObj;
     const is_succeed = await User.repwd(user);
 

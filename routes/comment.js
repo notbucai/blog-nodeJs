@@ -27,9 +27,6 @@ async function post_fun(ctx, next) {
       throw Error("登陆过期");
     }
 
-    console.log(user,user._id);
-
-    console.log(a_id, content);
 
     const comment = new Comment({
       a_id,
@@ -38,9 +35,6 @@ async function post_fun(ctx, next) {
       u_id: user._id
     });
     
-    // 5c3ff208125d840a880054ab
-
-    console.log(comment); 
 
     const res_c = await Comment.addComment(comment);
 

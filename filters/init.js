@@ -19,10 +19,6 @@ module.exports = function () {
     const newArticles = await Article.newArticles();
     const hotArticles = await Article.hotArticles();
 
-    // hotArticles
-
-    // console.log(navs);
-
     ctx.state = {
       ...init,
       user: ctx.session.user,

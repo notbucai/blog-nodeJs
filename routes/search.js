@@ -14,8 +14,6 @@ async function get_fun(ctx, next) {
     ...await searchArticles(keyword)
   });
 
-  // console.log(ctx.query);
-
 }
 module.exports = {
   "GET /search": get_fun
