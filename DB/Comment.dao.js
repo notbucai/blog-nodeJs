@@ -127,7 +127,6 @@ Schema.static('a_idToComments', async function (a_id) {
     },
   ]);
 
-
   return comments;
 });
 
@@ -135,6 +134,35 @@ Schema.static('a_idToComments', async function (a_id) {
 Schema.static('addComment', async function (doc) {
 
   return doc.save();
+
+});
+
+Schema.static('getCommentsByUid', async function (u_id) {
+
+  return await this.aggregate([
+    {
+      $sort: { _id: -1 }
+    },
+    {
+      $match: {
+        u_id: mongoose.Types.ObjectId(u_id)
+      }
+    },
+    {
+      $lookup: {
+        from: "articles",
+        localField: "a_id",
+        foreignField: "_id",
+        as: "article"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$article",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+  ]);
 
 });
 

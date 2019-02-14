@@ -17,23 +17,35 @@ const Schema = mongoose.Schema({
   u_name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+
+  },
+  nickname: {
+    type: String,
+    default() {
+      return this.nickname || this.u_name;
+    }
+  },
+  u_info: {
+    type: String,
+    default: ""
   },
   u_pwd: {
     type: String,
-    required: true,
-    // set: md5,
-    // get: md5
+    required: true
   },
   u_email: {
     type: String,
     unique: true,
     set: decodeURIComponent,
-    // get: decodeURI
   },
   u_img: { // 用户头像
     type: String,
     default: ""
+  },
+  u_website: {
+    type: String,
+    default: "",
   },
   is_admin: {
     type: Boolean,
@@ -59,9 +71,6 @@ const Schema = mongoose.Schema({
 
 
 Schema.static('login', async function (doc) {
-  // console.log(u_login, u_pwd);
-  console.log(doc.u_email, doc.u_name, doc.u_pwd);
-  console.log(typeof doc);
 
   const db_res = await this.find({
     u_pwd: md5(doc.u_pwd),
@@ -71,28 +80,17 @@ Schema.static('login', async function (doc) {
     ]
   });
 
-  // console.log(db_res,await this.find({u_pwd:"wx123456"}));
-
   return db_res && db_res.length && db_res[0];
 
 });
-// db.users.find({
-//   $or:[
-//     {u_name:'1450941858%40qq.com'},{u_email:"1450941858@qq.com"}
-//   ],
-//   u_pwd:"40d628dc4880d42b93972c1e640d301b"
-// }).pretty()
+
 Schema.static('reg', async function (doc) {
-  // console.log(u_login, u_pwd);
 
   const { u_name, u_email } = doc;
 
   const may_user = await this.findOne({ $or: [{ u_name }, { u_email }] });
 
-  // console.log(may_user);
-
   if (may_user) {
-
     return false;
   }
   doc.u_pwd = md5(doc.u_pwd);
@@ -103,13 +101,10 @@ Schema.static('reg', async function (doc) {
 });
 
 Schema.static('repwd', async function (doc) {
-  // console.log(u_login, u_pwd);
 
   const { u_email } = doc;
 
   const may_user = await this.findOne({ u_email });
-
-  // console.log(may_user);
 
   if (!may_user) {
 
@@ -119,10 +114,18 @@ Schema.static('repwd', async function (doc) {
 
   may_user.u_pwd = md5(doc.u_pwd);
 
-  await doc.updateOne({u_email}, may_user);
+  await doc.updateOne({ u_email }, may_user);
 
   return true;
 
+});
+
+Schema.static('getUserById', async function (u_id) {
+  const userData = await this.findOne({
+    _id: u_id
+  });
+
+  return userData;
 });
 
 const User = mongoose.model('User', Schema);
@@ -131,17 +134,17 @@ const User = mongoose.model('User', Schema);
 module.exports = User;
 
 
-// const user = new User({
-//   u_name: "bucai",
-//   u_pwd: "40d628dc4880d42b93972c1e640d301b",
-//   u_email: "1234@qq.com",
-//   is_admin: true,
-// });
+const user = new User({
+  u_name: "test1",
+  u_pwd: "40d628dc4880d42b93972c1e640d301b",
+  u_email: "123241@qq.com",
+  is_admin: true,
+});
 
-// user.save().then((a)=>{
-//   console.log(a);
-// });
+// user.save();
+// console.log(user);
 
-// User.find().then((a)=>{
+
+// User.find().then((a) => {
 //   console.log(a);
 // });

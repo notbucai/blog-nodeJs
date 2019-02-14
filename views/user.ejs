@@ -8,11 +8,17 @@
 
 <main id="user" class="container">
   <div class="informationCard">
-    <img src="/img/user_img.gif" alt="用户头像" class="user_img">
-    <p class="user_name">用户昵称</p>
-    <p class="user_info">简介</p>
+    <img src="<%=current_user.u_img || '/img/user_img.gif'%>" alt="用户头像" class="user_img">
+    <p class="user_name"><%=current_user.nickname||current_user.u_name%></p>
+    <p class="user_info"><%=current_user.u_info%></p>
     <!-- followed 关注 unfollowed 已关注 unfollow 取消关注-->
+    <%if(user && user._id !== _id){%>
+    <%if(isFocusUser){%>
     <button class="btn unfollowed">已关注</button>
+    <%}else{%>
+    <button class="btn followed">关 注</button>
+    <%}%>
+    <%}%>
   </div>
   <div class="userinfoMain">
     <ul class="userinfoNavs">
@@ -20,10 +26,10 @@
       <li class="userinfoNavs-item">消息<i class="msgnum">45</i></li>
       <li class="userinfoNavs-item">
         评论
-        <i class="msgnum">45</i>
+        <i class="msgnum"><%=current_comments.length%></i>
       </li>
-      <li class="userinfoNavs-item">粉丝</li>
-      <li class="userinfoNavs-item">关注</li>
+      <li class="userinfoNavs-item">粉丝<i class="msgnum"><%=toFocusMe.length%></i></li>
+      <li class="userinfoNavs-item">关注<i class="msgnum"><%=meAFocus.length%></i></li>
     </ul>
     <div class="userinfoList">
       <div class="userinfo-item active">
@@ -33,23 +39,23 @@
         <main>
           <div class="info-item">
             <label class="item-label">昵称</label>
-            <p>bucai</p>
+            <p><%=current_user.nickname%></p>
           </div>
           <div class="info-item">
-            <label class="item-label">账户</label>
-            <p>bucai</p>
+            <label class="item-label">账号</label>
+            <p><%=current_user.u_name%></p>
           </div>
           <div class="info-item">
             <label class="item-label">邮箱</label>
-            <p>1450941858@qq.com</p>
+            <p><%=current_user.u_email%></p>
           </div>
           <div class="info-item">
             <label class="item-label">网站</label>
-            <p></p>
+            <p><%=current_user.u_website%></p>
           </div>
           <div class="info-item">
             <label class="item-label">个人描述</label>
-            <p></p>
+            <p><%=current_user.u_info || "这个人很懒，啥也没留"%></p>
           </div>
         </main>
       </div>
@@ -77,86 +83,59 @@
       </div>
       <div class="userinfo-item">
         <div class="messageList">
+          <%current_comments.forEach((comment)=>{%>
           <div class="messageList-item">
             <div class="message-title">
               <p>回复了文章
-                <a href="/">文章1</a>
+                <a href="/article/<%=comment.article._id%>"><%=comment.article.title%></a>
               </p>
-              <span>2019年2月10日 19:19</span>
+              <span><%=comment.c_time%></span>
             </div>
             <div class="message-content">
-              @不才鸭 :java用的什么软件？jsp就
+              <%=Buffer.from(comment.content,'base64').toString()%>
             </div>
           </div>
-
+          <%})%>
         </div>
       </div>
       <div class="userinfo-item">
         <div class="focusList">
+          <%toFocusMe.forEach((item)=>{%>
           <div class="focusList-item">
             <img class="user_img"
-              src="http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203"
+              src="<%=item.user.u_img||'http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203'%>"
               alt="头像">
             <div class="u_info">
-              <p class="u_title">昵称</p>
-              <p class="u_info_">简介</p>
+              <p class="u_title"><%=item.user.u_name%></p>
+              <p class="u_info_"><%=item.user.u_info%></p>
             </div>
-            <button class="btn unfollowed" data-focus_id="123">已关注</button>
+            <% if(user&&user._id){ %>
+            <button class="btn unfollowed">已关注</button>
+            <% }else{ %>
+            <button class="btn followed">关 注</button>
+            <% } %>
           </div>
-          <div class="focusList-item">
-            <img class="user_img"
-              src="http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203"
-              alt="头像">
-            <div class="u_info">
-              <p class="u_title">昵称</p>
-              <p class="u_info_">简介</p>
-            </div>
-            <button class="btn unfollowed" data-focus_id="123">已关注</button>
-          </div>
-          <div class="focusList-item">
-            <img class="user_img"
-              src="http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203"
-              alt="头像">
-            <div class="u_info">
-              <p class="u_title">昵称</p>
-              <p class="u_info_">简介</p>
-            </div>
-            <button class="btn unfollowed" data-focus_id="123">已关注</button>
-          </div>
+          <%})%>
         </div>
       </div>
       <div class="userinfo-item">
         <div class="focusList">
+          <%meAFocus.forEach((item)=>{%>
           <div class="focusList-item">
             <img class="user_img"
-              src="http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203"
+              src="<%=item.f_user.u_img || 'http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203'%>"
               alt="头像">
             <div class="u_info">
-              <p class="u_title">昵称</p>
-              <p class="u_info_">简介</p>
+              <p class="u_title"><%=item.f_user.u_name%></p>
+              <p class="u_info_"><%=item.f_user.u_info%></p>
             </div>
-            <button class="btn unfollowed" data-focus_id="123">已关注</button>
+            <% if(user&&user._id){ %>
+            <button class="btn unfollowed">已关注</button>
+            <% }else{ %>
+            <button class="btn followed">关 注</button>
+            <% } %>
           </div>
-          <div class="focusList-item">
-            <img class="user_img"
-              src="http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203"
-              alt="头像">
-            <div class="u_info">
-              <p class="u_title">昵称</p>
-              <p class="u_info_">简介</p>
-            </div>
-            <button class="btn unfollowed" data-focus_id="123">已关注</button>
-          </div>
-          <div class="focusList-item">
-            <img class="user_img"
-              src="http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203"
-              alt="头像">
-            <div class="u_info">
-              <p class="u_title">昵称</p>
-              <p class="u_info_">简介</p>
-            </div>
-            <button class="btn unfollowed" data-focus_id="123">已关注</button>
-          </div>
+          <%})%>
         </div>
       </div>
     </div>

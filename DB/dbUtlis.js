@@ -4,7 +4,10 @@ var Mongoose = require('mongoose')
 
 const start = Date.now();
 
-Mongoose.connect(url + dbName, { useNewUrlParser: true });
+Mongoose.connect(url + dbName, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
 
 
 Mongoose.connection.on('connected', function () {
@@ -23,6 +26,6 @@ Mongoose.connection.on('error', function (err) {
 */
 Mongoose.connection.on('disconnected', function () {
   console.log('Mongoose connection disconnected');
-});  
+});
 
 module.exports = Mongoose;

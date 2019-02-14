@@ -2,8 +2,6 @@ const path = require('path');
 const Article = require('../DB/Article.dao');
 const Comment = require('../DB/Comment.dao');
 
-
-
 async function get_fun(ctx, next) {
 
 

@@ -10,7 +10,7 @@ const Store = require("./Middleware/Store");
 
 
 const initFilters = require("./filters/init");
-
+const errorFilters = require("./filters/error");
 
 const port = 3188;
 
@@ -28,6 +28,8 @@ app.use(session({
   store: new Store(),
   maxAge: 2 * 60 * 60 * 1000
 }));
+
+app.use(errorFilters());
 
 app.use(initFilters());
 

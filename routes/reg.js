@@ -44,7 +44,7 @@ async function post_fun(ctx, next) {
     const user = new User(req_body);
 
     const reg_succeed = await User.reg(user);
-
+    
     if (reg_succeed) {
       res.code = 200;
       res.msg = "注册成功";
