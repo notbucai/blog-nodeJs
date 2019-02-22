@@ -1,6 +1,8 @@
-# blogApi 我的个人博客
+# 重写 我的个人博客
 
-重写博客
+## `线上地址`
+
+> [www.ncgame.cc](http://www.ncgame.cc/)
 
 # 技术栈
 
