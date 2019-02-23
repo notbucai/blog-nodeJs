@@ -15,3 +15,11 @@
 ## 使用
 
 > npm run dev  // 启动服务
+
+## 数据表
+
+`users` 用户表  
+`articles` 文章表  
+`comments` 用户评论表  
+`focus` 关注表  
+`parts` 分类表 

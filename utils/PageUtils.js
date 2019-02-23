@@ -9,7 +9,7 @@ function getPageLen(c_len, a_len, n_len = 6) {
   let stat = c_len - qh < 0 ? 0 : c_len - qh;
 
   let end = c_len + n_len - (c_len - stat) > a_len ? a_len : c_len + n_len - (c_len - stat);
-  console.log(a_len);
+  // console.log(a_len);
 
   return {
     stat,
@@ -37,10 +37,8 @@ async function getPageArgs(part_url, page_index) {
   const articles = await Article.page(p_id, page_index);
 
   const page_size = await Article.page_size($where);
-  console.log(page_size);
 
   const pag_nav_show = getPageLen(page_index, page_size);
-  // console.log(articles);
 
   return {
     articles,

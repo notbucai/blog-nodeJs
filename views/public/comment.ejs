@@ -10,9 +10,10 @@
         <input type="hidden" name="a_id" value="<%=currendArticle._id%>">
 
         <input type="hidden" name="r_u_id" id="r_u_id" value="">
-        
+
         <div class="form-group">
-          <textarea name="content" rows="5" placeholder="来都来了，不留下点东西吗，XIAOLAODI (。・∀・)ノ" class="form-control form-textarea"></textarea>
+          <textarea name="content" rows="5" placeholder="来都来了，不留下点东西吗，XIAOLAODI (。・∀・)ノ"
+            class="form-control form-textarea"></textarea>
         </div>
         <!-- <div class="form-group">
           <label class="sr-only">昵称</label>
@@ -81,11 +82,15 @@
       <li class="comment-item">
         <div class="user">
           <div class="user-img">
-            <img data-src="holder.js/50x50?auto=yes&theme=industrial&text=IMG" alt="">
+            <a href="/user/<%=comment.user && comment.user._id%>">
+              <img data-src="holder.js/50x50?auto=yes&theme=industrial&text=IMG" alt="">
+            </a>
           </div>
           <div class="user-detail">
             <p class="user-name">
-              <%=comment.user && comment.user.u_name%>
+              <a href="/user/<%=comment.user && comment.user._id%>">
+                <%=comment.user && comment.user.u_name%>
+              </a>
             </p>
             <p class="user-content">
               <%=comment.c_time%>
@@ -105,10 +110,10 @@
       </li>
       <%});%>
 
-    </ol>
-  </main>
+      </ol>
+      </main>
 
-  <!-- <nav aria-label="Page navigation" class="text-center">
+      <!-- <nav aria-label="Page navigation" class="text-center">
     <ul class="pagination">
       <li>
         <a href="#" aria-label="Previous">
@@ -127,4 +132,4 @@
       </li>
     </ul>
   </nav> -->
-</div>
+    </div>

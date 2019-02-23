@@ -9,14 +9,14 @@
 <main id="user" class="container">
   <div class="informationCard">
     <img src="<%=current_user.u_img || '/img/user_img.gif'%>" alt="用户头像" class="user_img">
-    <p class="user_name"><%=current_user.nickname||current_user.u_name%></p>
+    <p class="user_name"><%=current_user.nickname || current_user.u_name%></p>
     <p class="user_info"><%=current_user.u_info%></p>
     <!-- followed 关注 unfollowed 已关注 unfollow 取消关注-->
     <%if(user && user._id !== _id){%>
     <%if(isFocusUser){%>
-    <button class="btn unfollowed">已关注</button>
+    <button class="u_btn unfollowed">已关注</button>
     <%}else{%>
-    <button class="btn followed">关 注</button>
+    <button class="u_btn followed">关 注</button>
     <%}%>
     <%}%>
   </div>
@@ -106,13 +106,13 @@
               src="<%=item.user.u_img||'http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203'%>"
               alt="头像">
             <div class="u_info">
-              <p class="u_title"><%=item.user.u_name%></p>
+              <p class="u_title"><a href="/user/<%=item.user._id%>"><%=item.user.u_name%></a></p>
               <p class="u_info_"><%=item.user.u_info%></p>
             </div>
             <% if(user&&user._id){ %>
-            <button class="btn unfollowed">已关注</button>
+            <button class="u_btn unfollowed">已关注</button>
             <% }else{ %>
-            <button class="btn followed">关 注</button>
+            <button class="u_btn followed">关 注</button>
             <% } %>
           </div>
           <%})%>
@@ -126,13 +126,15 @@
               src="<%=item.f_user.u_img || 'http://img.twenq.com/upload/user/avatar/11E68E08859F3D3ED8123CA35AB08B6F.jpg?v=1543660509203'%>"
               alt="头像">
             <div class="u_info">
-              <p class="u_title"><%=item.f_user.u_name%></p>
+              <p class="u_title">
+                <a href="/user/<%=item.f_user._id%>"><%=item.f_user.u_name%></a>
+              </p>
               <p class="u_info_"><%=item.f_user.u_info%></p>
             </div>
             <% if(user&&user._id){ %>
-            <button class="btn unfollowed">已关注</button>
+            <button class="u_btn unfollowed">已关注</button>
             <% }else{ %>
-            <button class="btn followed">关 注</button>
+            <button class="u_btn followed">关 注</button>
             <% } %>
           </div>
           <%})%>
@@ -145,6 +147,5 @@
 <%-include('public/copy')%>
 
 <%-include('public/actions')%>
-
 
 <%- include('public/footer'); %>
