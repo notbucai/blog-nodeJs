@@ -32,6 +32,10 @@ const Schema = mongoose.Schema({
       return Buffer.from(data).toString("base64");
     }
   },
+  is_scope: {
+    type: Boolean,
+    default: false
+  },
   c_ip: {
     type: String,
     default: null
@@ -131,6 +135,90 @@ Schema.static('a_idToComments', async function (a_id) {
 });
 
 
+Schema.static('page', async function (index, limit = 10, where = {}) {
+  let Count = index * limit;
+
+  for (const key in where) {
+    if (where.hasOwnProperty(key)) {
+      const item = where[key];
+      switch (key) {
+        case 'u_id':
+          where[key] = mongoose.Types.ObjectId(item);
+          break;
+        case 'a_id':
+          where[key] = mongoose.Types.ObjectId(item);
+          break;
+      }
+    }
+  }
+
+  const comments = await this.aggregate([
+    {
+      $match: where
+    },
+    {
+      $sort: { _id: -1 }
+    },
+    {
+      $skip: Count
+    },
+    {
+      $limit: limit
+    },
+    {
+      $lookup: { // 左连接
+        from: "users", // 关联到order表
+        localField: "u_id", // user 表关联的字段
+        foreignField: "_id", // order 表关联的字段
+        as: "user"
+      }
+    },
+    {
+      $lookup: { // 左连接
+        from: "users", // 关联到order表
+        localField: "r_u_id", // user 表关联的字段
+        foreignField: "_id", // order 表关联的字段
+        as: "p_user"
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$user",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+    {
+      $unwind: { // 拆分子数组
+        path: "$p_user",
+        preserveNullAndEmptyArrays: true // 空的数组也拆分
+      }
+    },
+  ]);
+
+  return comments;
+});
+
+Schema.static('count', async function (where = {}) {
+
+  for (const key in where) {
+    if (where.hasOwnProperty(key)) {
+      const item = where[key];
+      switch (key) {
+        case 'u_id':
+          where[key] = mongoose.Types.ObjectId(item);
+          break;
+        case 'a_id':
+          where[key] = mongoose.Types.ObjectId(item);
+          break;
+      }
+    }
+  }
+
+  const count = Math.ceil(((await this.countDocuments(where))));
+
+  return count;
+});
+
 Schema.static('addComment', async function (doc) {
 
   return doc.save();
@@ -165,6 +253,29 @@ Schema.static('getCommentsByUid', async function (u_id) {
   ]);
 
 });
+
+Schema.static('auditCommentById', async function (ids) {
+
+  for (const id of ids) {
+    id['_id'] = mongoose.Types.ObjectId(id['_id'])
+  }
+
+  await this.updateMany({
+    $or: ids,
+  }, {
+      is_scope: true
+    });
+
+});
+
+Schema.static('deleteCommentById', async function (id) {
+  
+  id = mongoose.Types.ObjectId(id);
+
+  await this.deleteOne({ _id: id })
+
+});
+
 
 const Comment = mongoose.model('Comment', Schema);
 

@@ -38,19 +38,23 @@ Schema.static('getNav', async function (part_url) {
 
 });
 
+Schema.static('addAndUpdate', async function (doc) {
+
+  await this.updateOne({
+    _id: doc._id
+  }, doc, {
+      upsert: true
+    });
+
+});
+
+
+Schema.static('deleteById', async function (_id) {
+  _id = mongoose.Types.ObjectId(_id);
+  await this.deleteOne({ _id });
+});
+
+
 const Part = mongoose.model('Part', Schema);
 
 module.exports = Part;
-
-// const part = new Part({
-//   title:"测试分类",
-//   url:"test"
-// });
-
-// part.save().then((a)=>{
-//   console.log(a);
-// });
-
-// part.find().then((a) => {
-//   console.log(a);
-// });

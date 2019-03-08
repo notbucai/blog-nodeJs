@@ -1,4 +1,4 @@
-const { readdirSync } = require('fs');
+const { readdirSync, statSync } = require('fs');
 const { resolve } = require('path');
 const koaRouter = require('koa-router')();
 
@@ -22,32 +22,44 @@ function addRouter({ method, url }, fun) {
   }
 }
 
-const init = (dir) => {
+/**
+ * 初始化路由
+ * @param {String} dir 路由目录
+ */
+const readRoutes = (dir) => {
 
   const route_files = readdirSync(dir);
 
   route_files.forEach((route_name) => {
-    console.log(resolve(dir, route_name));
+    const target = resolve(dir, route_name);
 
-    const router = require(resolve(dir, route_name));
+    if (statSync(target).isDirectory()) {
 
-    for (const key in router) {
+      readRoutes(target);
 
-      if (router.hasOwnProperty(key)) {
+    } else {
 
-        const [method, url] = key.split(' ');
+      const router = require(target);
 
-        const fun = router[key];
+      for (const key in router) {
 
-        addRouter({ method, url }, fun);
+        if (router.hasOwnProperty(key)) {
 
+          const [method, url] = key.split(' ');
+
+          console.info(method, url ,target);
+
+          const fun = router[key];
+
+          addRouter({ method, url }, fun);
+
+        }
       }
     }
-
   });
 
   return koaRouter.routes();
 
 }
 
-module.exports = init;
+module.exports = readRoutes;

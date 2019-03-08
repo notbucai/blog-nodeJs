@@ -4,7 +4,6 @@ const Comment = require('../DB/Comment.dao');
 
 async function get_fun(ctx, next) {
 
-
   try {
     const part_name = path.basename(ctx.url);
 

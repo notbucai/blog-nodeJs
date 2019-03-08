@@ -18,7 +18,6 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-
   },
   nickname: {
     type: String,
@@ -69,6 +68,20 @@ const Schema = mongoose.Schema({
   }
 });
 
+Schema.static('page', async function (index, limit = 10, where = {}) {
+  let Count = index * limit;
+
+  return await this.find(where).skip(Count).limit(limit);
+
+});
+
+Schema.static('count', async function (where = {}) {
+
+  const count = Math.ceil(await this.countDocuments(where));
+
+  return count;
+
+});
 
 Schema.static('login', async function (doc) {
 
@@ -121,30 +134,36 @@ Schema.static('repwd', async function (doc) {
 });
 
 Schema.static('getUserById', async function (u_id) {
+
   const userData = await this.findOne({
-    _id: u_id
+    _id: mongoose.Types.ObjectId(u_id)
   });
 
   return userData;
 });
 
+Schema.static('updateSome', async function (doc) {
+  // 备注 我是个傻子 (id  _id)
+  await this.updateOne({
+    _id: doc._id,
+  }, doc);
+
+});
+
+
+Schema.static('setAdminById', async function (id) {
+  const user = await this.getUserById(id);
+  if (!user) throw new Error("没有这个用户");
+  await this.updateOne({
+    _id: id,
+  }, {
+      is_admin: user.is_admin
+    });
+
+});
+
+
 const User = mongoose.model('User', Schema);
 
 
 module.exports = User;
-
-
-const user = new User({
-  u_name: "test1",
-  u_pwd: "40d628dc4880d42b93972c1e640d301b",
-  u_email: "123241@qq.com",
-  is_admin: true,
-});
-
-// user.save();
-// console.log(user);
-
-
-// User.find().then((a) => {
-//   console.log(a);
-// });
