@@ -87,7 +87,8 @@
           <div class="messageList-item">
             <div class="message-title">
               <p>回复了文章
-                <a href="/article/<%=comment.article._id%>"><%=comment.article.title%></a>
+                <a
+                  href="/article/<%=comment.article && comment.article._id%>"><%=comment.article&&comment.article.title%></a>
               </p>
               <span><%=comment.c_time%></span>
             </div>

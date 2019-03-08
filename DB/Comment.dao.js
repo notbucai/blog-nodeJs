@@ -51,6 +51,11 @@ Schema.static('newComments', async function (cLen = 6) {
 
   return await this.aggregate([
     {
+      $match: {
+        is_scope: true
+      }
+    },
+    {
       $sort: { _id: -1 }
     },
     {
@@ -98,7 +103,8 @@ Schema.static('a_idToComments', async function (a_id) {
     },
     {
       $match: {
-        a_id: mongoose.Types.ObjectId(a_id)
+        a_id: mongoose.Types.ObjectId(a_id),
+        is_scope: true
       }
     },
     {
@@ -157,7 +163,10 @@ Schema.static('page', async function (index, limit = 10, where = {}) {
       $match: where
     },
     {
-      $sort: { _id: -1 }
+      $sort: {
+        is_scope: 1,
+        _id: -1,
+      }
     },
     {
       $skip: Count
@@ -269,7 +278,7 @@ Schema.static('auditCommentById', async function (ids) {
 });
 
 Schema.static('deleteCommentById', async function (id) {
-  
+
   id = mongoose.Types.ObjectId(id);
 
   await this.deleteOne({ _id: id })

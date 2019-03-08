@@ -1,0 +1,98 @@
+#sform {
+  position: fixed;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(https://acg.toubiec.cn/random);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.form-con {
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.85);
+  margin: 200px auto;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0 8px 15px rgba(146, 146, 146, 0.39);
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .form-con {
+    width: 96%;
+    margin-top: 100px;
+  }
+}
+.form-con h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #000;
+  margin-top: 15px;
+}
+.form-con form {
+  margin-top: 30px;
+}
+.form-con .input,
+.form-con button {
+  width: 100%;
+  height: 44px;
+  font-size: 14px;
+}
+.form-con .input {
+  padding: 0 15px 0 15px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #c1c1c1;
+  line-height: 24px;
+  background-color: transparent;
+}
+.form-con .input.err {
+  border-color: #ff6fa2;
+}
+.form-con .input:focus {
+  border-color: #888;
+  outline: 0;
+  box-shadow: 0 0px 1px 1px rgba(146, 146, 146, 0.25);
+}
+.form-con button {
+  color: #fff;
+  background-color: #37ecba;
+  background-image: linear-gradient(to top left, #37ecba 0%, #72afd3 100%);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.form-con button:hover {
+  background-image: linear-gradient(to top left, #24f1b7 0%, #4aa9e0 100%);
+}
+.form-con button:focus {
+  outline: 0;
+}
+.form-con .code {
+  color: #ddd;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form-box {
+  margin-bottom: 30px;
+  position: relative;
+}
+.form-info {
+  margin: 0;
+  margin-left: 4px;
+  color: #ff6fa2;
+  display: none;
+  position: absolute;
+  bottom: -22px;
+}
+.form-o {
+  display: flex;
+  justify-content: space-between;
+}

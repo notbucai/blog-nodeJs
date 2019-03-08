@@ -79,11 +79,12 @@
   <main>
     <ol class="comment-list">
       <%a_idToComments.forEach(function(comment){%>
+      <%if(comment.is_scope){%>
       <li class="comment-item">
         <div class="user">
           <div class="user-img">
             <a href="/user/<%=comment.user && comment.user._id%>">
-              <img data-src="holder.js/50x50?auto=yes&theme=industrial&text=IMG" alt="">
+              <img src="<%=comment.user&&comment.user.u_img || 'http://q1.qlogo.cn/g?b=qq&nk=331526028&s=100'%>" alt="">
             </a>
           </div>
           <div class="user-detail">
@@ -102,12 +103,13 @@
           <span class="at">@
             <%=comment.p_user.u_name%></span>
           <%}%>
-          <%=Buffer.from(comment.content,'base64').toString()%>
+              <%=Buffer.from(comment.content,'base64').toString()%>
         </div>
         <div class="comment-action" data-u_id="<%=comment.user && comment.user._id%>">
           回复
         </div>
       </li>
+      <%}%>
       <%});%>
 
       </ol>

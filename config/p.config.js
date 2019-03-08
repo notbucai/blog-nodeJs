@@ -25,6 +25,6 @@ module.exports = {
   '/api/admin/user/getUserById': Ptype.ADMIN,
   '/api/admin/user/updateSome': Ptype.ADMIN,
 
-  '/api/admin/login': Ptype.ADMIN,
+  // '/api/admin/login': Ptype.ADMIN, 不需要权限
   '/api/admin/logout': Ptype.ADMIN,
 }

@@ -57,6 +57,18 @@ const Schema = mongoose.Schema({
   }
 });
 
+Schema.static('hitsIncById', async function (_id) {
+  // 必须同步才会执行
+  await this.updateOne({
+    _id: mongoose.Types.ObjectId(_id)
+  }, {
+      '$inc': {
+        hits: 1
+      }
+    });
+
+});
+
 Schema.static('page', async function (p_id, index, pageSize = 10, where = {}) {
   let Count = index * pageSize;
 
@@ -310,7 +322,7 @@ Schema.static('removeById', async function (_id) {
 
 Schema.static('addAndUpdate', async function (doc) {
 
-  await this.update({
+  await this.updateOne({
     _id: doc._id
   }, doc, {
       upsert: true

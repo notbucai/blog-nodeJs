@@ -9,8 +9,9 @@ async function get_fun(ctx, next) {
 
     const currendArticle = await Article.OneArticle(part_name);
     const a_idToComments = await Comment.a_idToComments(part_name);
+    Article.hitsIncById(part_name);
 
-    // render 默认使用 state 中的属性 且如果 state中有参数就不再取传递的参数
+    // render 默认使用 state 中的属性 且如果 state中有参 数就不再取传递的参数
     await ctx.render('article', {
       currendArticle,
       a_idToComments
