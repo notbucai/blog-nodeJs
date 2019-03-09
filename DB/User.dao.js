@@ -143,6 +143,7 @@ Schema.static('getUserById', async function (u_id) {
 });
 
 Schema.static('updateSome', async function (doc) {
+  doc.u_pwd && (doc.u_pwd = md5(doc.u_pwd));
   // 备注 我是个傻子 (id  _id)
   await this.updateOne({
     _id: doc._id,
@@ -161,6 +162,17 @@ Schema.static('setAdminById', async function (id) {
     });
 
 });
+
+
+Schema.static('updateUserData', async function (_id, data) {
+
+  // 备注 我是个傻子 (id  _id)
+  await this.updateOne({
+    _id: mongoose.Types.ObjectId(_id),
+  }, data);
+
+});
+
 
 
 const User = mongoose.model('User', Schema);

@@ -1,0 +1,72 @@
+<%if(subhead){%>
+<%- include('public/header',{title:subhead+" - "+title}); %>
+<%}else{%>
+<%- include('public/header'); %>
+<%}%>
+  
+<%- include('public/navber'); %>
+
+<main id="setting" class="container">
+  <form class="form-horizontal" method="POST" action="?">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">头像</label>
+      <div class="col-sm-10">
+        <p class="form-control-static u_img_set">
+          <img id="u_img_show" src="<%=current_user.u_img||'http://q2.qlogo.cn/headimg_dl?dst_uin=1450941858&spec=100'%>" alt="">
+          <!-- <input type="hidden" > -->
+          <input type="hidden" id="u_img" name="u_img" value="<%=current_user.u_img%>" />
+          <button class="btn btn-default btn-change_img" id="uoload_img"><p>修改</p><p>头像</p></button>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">登陆名</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">
+          <%=current_user.u_name%> <span style="font-size: 12px;color: #999;"> [修改请联系站长]</span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">昵称</label>
+      <div class="col-sm-10">
+        <input type="text" name="nickname" class="form-control" placeholder="昵称" value="<%=current_user.nickname%>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">邮箱</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">
+          <%=current_user.u_email%> <span style="font-size: 12px;color: #999;">[修改请联系站长]</span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">个人签名</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">
+          <!-- u_info: -->
+          <textarea class="form-control" rows="3" name="u_info" placeholder="个人签名"><%=current_user.u_info%></textarea>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">密码</label>
+      <div class="col-sm-10">
+        <input type="password" name="u_pwd" class="form-control" placeholder="密码 不修改请勿填写" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"></label>
+      <div class="col-sm-10">
+        <button class="btn btn-success btn-change">提 交</button>
+      </div>
+    </div>
+  </form>
+</main>
+
+<%-include('public/copy')%>
+
+<%-include('public/actions')%>
+
+<%- include('public/footer'); %>

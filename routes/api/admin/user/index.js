@@ -1,9 +1,7 @@
 const User = require('../../../../DB/User.dao');
 
 async function get_all(ctx, next) {
-
   const { name, page, limit } = ctx.query;
-
   let where = {};
 
   name && (where = {
@@ -22,7 +20,6 @@ async function get_all(ctx, next) {
   });
 
   const data = await User.page(page - 1, parseInt(limit), where);
-
   const count = await User.count(where);
 
   ctx.body = {

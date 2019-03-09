@@ -3,7 +3,8 @@
   <div class="container">
     <nav class="navbar navbar-default">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav"
+          aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -41,14 +42,14 @@
           <div class="u_user">
             <img src="<%= user.u_img || 'http://q2.qlogo.cn/headimg_dl?dst_uin=1450941858&spec=100' %>" alt="">
             <span class="u_name">
-              <%= user.u_name %></span>
+              <%=user.nickname || user.u_name %></span>
           </div>
           <div class="u_action">
             <div>
               <p><a href="/user/<%=user._id%>"><span class="glyphicon glyphicon-user"></span>个人中心</a></p>
-              <p><a href="">
+              <p><a href="/user/setting">
                   <span class="glyphicon glyphicon-cog"></span>设置</a></p>
-              <p><a href="">
+              <p><a href="/logout">
                   <span class="glyphicon glyphicon-off"></span>注销</a></p>
             </div>
           </div>
