@@ -24,68 +24,68 @@
         <%}%>
       </div>
       <%}%>
-      <% articles.forEach(function(article){ %>
-      <article class="article">
-        <main class="content row">
-          <div class="col-md-4">
-            <div class="img">
-              <img height="145px" src="<%= article.a_img || 'https://acg.toubiec.cn/random?'+(Math.random()*10000000| 0) %>"
-                alt="">
+        <% articles.forEach(function(article){ %>
+        <article class="article">
+          <main class="content row">
+            <div class="col-md-4">
+              <div class="img">
+                <img height="145px"
+                  src="<%= article.a_img || 'https://acg.toubiec.cn/random?'+(Math.random()*10000000| 0) %>" alt="">
+              </div>
             </div>
-          </div>
-          <div class="detail col-md-8">
-            <div class="detail-title">
+            <div class="detail col-md-8">
+              <div class="detail-title">
 
-              <span class="part hidden-xs">
+                <span class="part hidden-xs">
 
-                <%if(article.part && article.part.url){%>
-                <a href="/part/<%=article.part && article.part.url || 'none'%>">
-                  <%=article.part && article.part.title || "未分类"%></a>
-                <%}else{%>
-                <a href="/">
-                  <%="未分类"%></a>
+                  <%if(article.part && article.part.url){%>
+                  <a href="/part/<%=article.part && article.part.url || 'none'%>">
+                    <%=article.part && article.part.title || "未分类"%></a>
+                  <%}else{%>
+                  <a href="/">
+                    <%="未分类"%></a>
 
-                <%}%>
+                  <%}%>
               </span>
 
               <h3 class="title"><a href="/article/<%=article._id%>">
                   <%=article.title%></a></h3>
+              </div>
+              <div class="detail-content">
+                <p>
+                  <%=article.info%>
+                </p>
+              </div>
             </div>
-            <div class="detail-content">
-              <p>
-                <%=article.info%>
-              </p>
-            </div>
-          </div>
-        </main>
-        <footer class="info">
-          <span><i class="glyphicon glyphicon-user"></i><samp style="text-transform:capitalize">
-              <%=article.user&&article.user.u_name||"none"%></samp></span>
-          <span><i class="glyphicon glyphicon-calendar"></i><samp>
-              <%=time2DateStr(article.add_time)%></samp></span>
-          <span><i class="glyphicon glyphicon-comment"></i><samp>
-              <%=article.comment_size || 0%>条评论</samp></span>
-          <span class="hidden-xs"><i class="glyphicon glyphicon-eye-open"></i><samp>
-              <%=article.hits || 0%>次阅读</samp></span>
-        </footer>
-      </article>
-      <% }); %>
-      <%if(isnavigation){%>
-      <%-include('public/navigation')%>
-      <%}%>
+          </main>
+          <footer class="info">
+            <span><i class="glyphicon glyphicon-user"></i><samp style="text-transform:capitalize">
+                <%=article.user&&(article.user.nickname||article.user.u_name)||"none"%></samp></span>
+            <span><i class="glyphicon glyphicon-calendar"></i><samp>
+                <%=time2DateStr(article.add_time)%></samp></span>
+            <span><i class="glyphicon glyphicon-comment"></i><samp>
+                <%=article.comment_size || 0%>条评论</samp></span>
+            <span class="hidden-xs"><i class="glyphicon glyphicon-eye-open"></i><samp>
+                <%=article.hits || 0%>次阅读</samp></span>
+          </footer>
+        </article>
+        <% }); %>
+        <%if(isnavigation){%>
+        <%-include('public/navigation')%>
+        <%}%>
     </div>
 
     <div class="col-md-4">
 
       <%-include('widgets/me')%>
 
-      <%-include('widgets/comment')%>
+        <%-include('widgets/comment')%>
 
-      <%-include('widgets/tabs')%>
+        <%-include('widgets/tabs')%>
+
+      </div>
 
     </div>
-
-  </div>
 
 </main>
 

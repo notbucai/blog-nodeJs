@@ -22,7 +22,7 @@
             <span class="hidden-xs"><i class="glyphicon glyphicon-eye-open"></i><samp>
                 <%=currendArticle.hits || 0%>次阅读</samp></span>
             <span><i class="glyphicon glyphicon-user"></i><samp style="text-transform:capitalize">
-                <%=currendArticle.user&&currendArticle.user.u_name||"none"%></samp></span>
+                <%=currendArticle.user && (currendArticle.user.nickname || currendArticle.user.u_name) || "none"%></samp></span>
           </div>
         </header>
         <main id="content">

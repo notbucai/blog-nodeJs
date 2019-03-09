@@ -1,0 +1,64 @@
+<%if(subhead){%>
+<%- include('public/header',{title:subhead+" - "+title}); %>
+<%}else{%>
+<%- include('public/header'); %>
+<%}%>
+    
+  <%- include('public/navber'); %>
+<%- include('public/logo'); %>
+
+<main id="main" class="container">
+
+  <div class="row">
+    <div class="col-md-8">
+
+      <div class="links">
+        <header>
+          <h1>DaLao们</h1>
+          <p>大佬们的链接</p>
+        </header>
+        <main>
+          <ul>
+            <%links.forEach(item=>{%>
+            <li>
+              <a href="<%item.link || '/'%>" target="_blink">
+                <div class="link-img">
+                  <img src="<%=item.l_img || 'http://q1.qlogo.cn/g?b=qq&nk=331526028&s=100'%>" alt="">
+                </div>
+                <div class="link-detail">
+                  <p class="link-name"><%=item.title%></p>
+                  <p class="link-content"><%=item.info%></p>
+                </div>
+              </a>
+            </li>
+            <%})%>
+          </ul>
+          <header>
+            <h1>关于友链交换</h1>
+          </header>
+          <main>
+            <p>给我发邮件哦 <span class="color-red">[1450941858@qq.com]</span></p>
+          </main>
+        </main>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+      <%-include('widgets/me')%>
+
+      <%-include('widgets/comment')%>
+
+      <%-include('widgets/tabs')%>
+    </div>
+
+  </div>
+
+</main>
+
+<%-include('public/copy')%>
+
+<%-include('public/actions')%>
+
+<%- include('public/footer'); %>
