@@ -50,3 +50,4 @@ Schema.static('deleteById', async function (_id) {
 const Link = mongoose.model('Link', Schema);
 
 module.exports = Link;
+
