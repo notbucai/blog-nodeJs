@@ -1,2 +1,5 @@
 /test
 /node_modules
+/config/mail.config.js
+/config/cos.config.js
+/public/upload/*

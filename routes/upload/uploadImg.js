@@ -1,5 +1,5 @@
 const path = require('path');
-const { root } = require('../../config/website.config');
+const { upload } = require('../../utils/Cos');
 /**
  *  图片上传
  * @param {Content} ctx 
@@ -7,11 +7,13 @@ const { root } = require('../../config/website.config');
  */
 async function uploadImg(ctx, next) {
 
+  const { code, path: src } = await upload(ctx.request.files.img.path, ctx.request.files.img.path.replace(path.join(__dirname, "../../public"), ""));
+
   ctx.body = {
     "code": "0000",
     "msg": "",
     "data": {
-      "src": root + ctx.request.files.img.path.replace(path.join(__dirname, "../../public"), "")
+      "src": src
     }
   };
 
