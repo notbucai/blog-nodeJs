@@ -7,6 +7,7 @@ const start = Date.now();
 Mongoose.connect(url + dbName, {
   useNewUrlParser: true,
   useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 
 

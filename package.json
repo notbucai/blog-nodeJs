@@ -10,23 +10,25 @@
   "author": "1450941858@qq.com",
   "license": "ISC",
   "dependencies": {
-    "cos-nodejs-sdk-v5": "^2.5.9",
-    "ejs": "^2.6.1",
-    "ioredis": "^4.3.0",
-    "koa": "^2.6.2",
-    "koa-body": "^4.0.8",
+    "cos-nodejs-sdk-v5": "^2.5.12",
+    "ejs": "^2.7.1",
+    "html2markdown": "^1.1.0",
+    "ioredis": "^4.14.1",
+    "koa": "^2.8.2",
+    "koa-body": "^4.1.1",
     "koa-bodyparser": "^4.2.1",
     "koa-cors": "0.0.16",
     "koa-router": "^7.4.0",
-    "koa-session2": "^2.2.8",
+    "koa-session2": "^2.2.10",
     "koa-static": "^5.0.0",
-    "koa-views": "^6.1.5",
-    "mongodb": "^3.1.10",
-    "mongolass": "^4.4.1",
-    "mongoose": "^5.4.1",
-    "nodemailer": "^5.1.1"
+    "koa-views": "^6.2.1",
+    "marked": "^0.7.0",
+    "mongodb": "^3.3.2",
+    "mongolass": "^4.4.6",
+    "mongoose": "^5.7.3",
+    "nodemailer": "^6.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.19.3"
   }
 }
