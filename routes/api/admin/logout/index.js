@@ -1,6 +1,6 @@
 async function get_fn(ctx) {
 
-  ctx.session.user = null;
+  ctx.jwt.user = null;
   ctx.throw(403);
 
 }

@@ -5,7 +5,6 @@ const Comment = require('../DB/Comment.dao');
 
 async function post_fun(ctx, next) {
 
-
   const res = {
     code: -1,
     msg: "未知错误"
@@ -20,13 +19,7 @@ async function post_fun(ctx, next) {
       throw Error("参数错误");
     }
 
-    const { user } = ctx.session;
-
-    if (!user || !user._id) {
-      res.code = 100;
-      throw Error("登陆过期");
-    }
-
+    const { user } = ctx.jwt;
 
     const comment = new Comment({
       a_id,

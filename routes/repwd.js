@@ -28,8 +28,7 @@ async function post_fun(ctx, next) {
       throw Error("参数错误，请检查！");
     }
 
-    const { codeObj } = ctx.session;
-
+    const codeObj = await ctx.redis.get(decodeURIComponent(u_email));
     if (!codeObj || Date.now() - codeObj.time > 5 * 60 * 1000) {
       ctx.code = 504;
       throw Error("验证码失效，请重新获取验证码");
@@ -42,7 +41,7 @@ async function post_fun(ctx, next) {
     
     const user = new User(req_body);
 
-    delete ctx.session.codeObj;
+    delete ctx.jwt.codeObj;
     const is_succeed = await User.repwd(user);
 
     if (is_succeed) {

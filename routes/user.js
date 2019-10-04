@@ -5,7 +5,7 @@ const Comment = require('../DB/Comment.dao');
 const Focus = require('../DB/Focus.dao');
 
 async function get_setting(ctx) {
-  const user = ctx.session.user;
+  const user = ctx.jwt.user;
 
   if (!user) {
     ctx.throw(403);
@@ -23,7 +23,7 @@ async function get_setting(ctx) {
 async function post_setting(ctx) {
   const body = ctx.request.body;
 
-  const { _id } = ctx.session.user;
+  const { _id } = ctx.jwt.user;
 
   const changeData = {};
 
@@ -67,9 +67,9 @@ async function get_fun(ctx, next) {
   const meAFocus = await Focus.getMeAFocus(_id);
 
   let isFocusUser = false;
-  if (ctx.session.user && ctx.session.user._id) {
+  if (ctx.jwt.user && ctx.jwt.user._id) {
     isFocusUser = await Focus.isFocusUser(new Focus({
-      u_id: ctx.session.user._id,
+      u_id: ctx.jwt.user._id,
       f_u_id: _id
     }));
   }
@@ -87,7 +87,7 @@ async function get_fun(ctx, next) {
 }
 
 async function logout(ctx) {
-  ctx.session.user = null;
+  ctx.jwt.user = null;
 
   ctx.response.redirect('/login');
 }

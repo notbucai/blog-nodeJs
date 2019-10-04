@@ -3,3 +3,4 @@
 /config/mail.config.js
 /config/cos.config.js
 /public/upload/*
+jwt.config.*

@@ -1,6 +1,7 @@
 const Ptype = require('../filters/permissionsType');
 module.exports = {
   '/api/uploadImg': Ptype.USER,
+  '/api/comment': Ptype.USER,
 
   '/api/admin/article/page': Ptype.ADMIN,
   '/api/admin/article/getArticleById': Ptype.ADMIN,

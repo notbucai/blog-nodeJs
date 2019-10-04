@@ -32,9 +32,11 @@ module.exports = function () {
     // 配置热门的文章
     const hotArticles = await Article.hotArticles();
     // 将 初始化数据载入 
+
     ctx.state = {
       ...init,
-      user: ctx.session.user,
+      ...ctx.state,
+      user: ctx.jwt.user,
       newComments,
       newArticles,
       hotArticles,

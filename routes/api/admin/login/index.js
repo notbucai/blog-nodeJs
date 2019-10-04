@@ -24,7 +24,7 @@ async function post_fun(ctx, next) {
     if (login_res_user) {
       res.code = "0000";
       res.msg = "登陆成功";
-      ctx.session.user = login_res_user;
+      ctx.jwt.user = login_res_user;
     } else {
       res.code = "401";
       throw Error("账户或密码错误");

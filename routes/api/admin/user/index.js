@@ -43,7 +43,7 @@ async function get_getUserById(ctx) {
 }
 
 async function get_getCurrentUser(ctx) {
-  const { _id } = ctx.session.user;
+  const { _id } = ctx.jwt.user;
   if (!_id) {
     ctx.throw(403);
     return;
@@ -92,7 +92,7 @@ async function post_deleteById(ctx) {
 
 async function post_setAdminById(ctx) {
   const id = ctx.request.body.id;
-  const cu_id = ctx.session.user && ctx.session.user.id;
+  const cu_id = ctx.jwt.user && ctx.jwt.user.id;
   if (cu_id != id) {
     await User.setAdminById(id);
 

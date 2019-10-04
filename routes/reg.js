@@ -29,7 +29,7 @@ async function post_fun(ctx, next) {
       throw Error("参数错误，请检查！");
     }
 
-    const { codeObj } = ctx.session;
+    const codeObj = await ctx.redis.get(decodeURIComponent(u_email));
 
     if (!codeObj || Date.now() - codeObj.time > 5 * 60 * 1000) {
       ctx.code = 504;
@@ -39,7 +39,7 @@ async function post_fun(ctx, next) {
       ctx.code = 402;
       throw Error("验证码不匹配，请重试");
     }
-    delete ctx.session.codeObj;
+    delete ctx.jwt.codeObj;
 
     const user = new User(req_body);
 

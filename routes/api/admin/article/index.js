@@ -71,10 +71,10 @@ async function POST_addAndUpdateById(ctx, next) {
   const _id = body._id || null;
   !body.u_img && delete body.u_img;
   const article = await Article.OneArticle(_id) || {};
-
+  
   const doc = new Article({
     ...article,
-    u_id: ctx.session.user._id,
+    u_id: ctx.jwt.user._id,
     ...body
   });
 

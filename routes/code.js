@@ -14,7 +14,7 @@ async function post_fun(ctx, next) {
       res.code = 401;
       throw Error("参数错误");
     }
-    const { codeObj } = ctx.session;
+    const codeObj = await ctx.redis.get(decodeURIComponent(u_email));
 
     if (codeObj && Date.now() - codeObj.time < 56 * 1000) {
       throw Error("每次获取间隔需要小于60秒");
@@ -26,11 +26,10 @@ async function post_fun(ctx, next) {
       res.code = 503;
       throw Error("邮件发送失败");
     }
-
-    ctx.session.codeObj = {
+    await ctx.redis.set(u_email, {
       code,
-      time: Date.now()
-    }
+      time: Date.now(),
+    });
 
     res.code = 200;
     res.msg = "获取验证码成功，请查看邮箱 如收件箱找不到请查看垃圾箱";
