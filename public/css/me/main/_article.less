@@ -33,18 +33,20 @@
         width: 100%;
         white-space: nowrap;
         overflow: hidden;
+        display: flex;
+        align-items: center;
         .part {
           display: inline-block;
+          height: 26px;
           padding: 4px 6px;
           font-size: 12px;
           font-weight: 700;
-          line-height: 14px;
           vertical-align: baseline;
           white-space: nowrap;
           background-color: #51aded;
-          margin-right: 5px;
+          margin-right: 10px;
           position: relative;
-          top: -3px;
+          // top: -3px;
           &::after {
             content: "";
             position: absolute;
@@ -60,9 +62,11 @@
           }
         }
         .title {
-          display: inline-block;
           line-height: 40px;
           margin: 0;
+          flex-grow: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
           a {
             color: #333;
             transition: all 1s;
