@@ -31,7 +31,7 @@ async function post_audit_fn(ctx) {
   // 获取评论的细节 
   const commit = await Comment.findById(_id);
 
-  if (!commit.is_scope) {
+  if (!commit || !commit.is_scope) {
     ctx.body = {
       code: "0000",
       msg: '',
@@ -39,31 +39,40 @@ async function post_audit_fn(ctx) {
     return;
   }
 
-  const { a_id, r_u_id, content } = commit;
+  const { a_id, r_u_id, content, u_id: c_u_id } = commit;
   const users = [];
-  // 获取文章
-  const articleCtx = await Article.findById(a_id);
 
-  // 获取文章发表者
-  const u_id = articleCtx.u_id;
-  if (Object.prototype.toString.call(r_u_id) === Object.prototype.toString.call(u_id)) {
-    ctx.body = {
-      code: "0000",
-      msg: '',
-    };
-    return;
-  }
   try {
+    // 获取文章
+    const articleCtx = await Article.findById(a_id);
+
+    // 获取文章发表者
+    const u_id = articleCtx.u_id;
+    const id1 = u_id && u_id.toString();
+    const id2 = r_u_id && r_u_id.toString();
+    const me_id = c_u_id && c_u_id.toString();
+
+
     const aUserCtx = await User.findById(u_id);
-    aUserCtx && users.push(aUserCtx);
-    if (r_u_id) {
-      const rUserCtx = await User.findById(r_u_id);
-      rUserCtx && users.push(rUserCtx);
+    if (me_id !== id1) {
+      aUserCtx && users.push(aUserCtx);
     }
+
+    if (r_u_id) {
+      if (me_id !== id2) {
+        const rUserCtx = await User.findById(r_u_id);
+        rUserCtx && users.push(rUserCtx);
+      }
+    }
+
     // 获取回复的用户
-    users.forEach(({ u_email, nickname }) => {
+    Array.from(new Set(users)).forEach(({ u_email, nickname }) => {
+      console.log(`send: ${u_email} in ${nickname}`);
+
       emailutils.sendComment(u_email, nickname, articleCtx.title, `http://blog.ncgame.cc/article/${articleCtx._id}`, Buffer.from(content, 'base64').toString());
     });
+    console.log(users);
+
   } catch (error) {
     console.log(error);
   }

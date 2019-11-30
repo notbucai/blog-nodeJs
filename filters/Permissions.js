@@ -6,7 +6,7 @@ module.exports = function (pConfig) {
     
     const url_o = ctx.url;
     const user = ctx.jwt.user || {};
-    console.log(user);
+    // console.log(user);
 
     // 获取路径
     const path = url.parse(url_o).pathname;

@@ -89,7 +89,7 @@ app.use(jwt({
 app.use(jwtMiddleware(jwtConfig.SECRET_OR_PRIVATE_KEY));
 
 app.use(async (ctx, next) => {
-  console.log(123);
+  // console.log(123);
   await next();
 });
 
