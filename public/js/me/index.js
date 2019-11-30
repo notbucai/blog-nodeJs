@@ -136,7 +136,7 @@
       for (const item of dataForm_Arr) {
         const s = item.split("=");
         const name = $.trim(s[0]),
-          value = decodeURI($.trim(s[1]));
+          value = decodeURIComponent($.trim(s[1])).replace(/\+/g, ' ');
         dataForm[name] = value;
       }
       console.log(JSON.stringify(dataForm));
@@ -416,7 +416,7 @@
           alert("上传成功");
 
         });
-        
+
       });
 
     });

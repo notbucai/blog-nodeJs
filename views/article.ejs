@@ -24,7 +24,7 @@
                 <%=currendArticle.user && (currendArticle.user.nickname || currendArticle.user.u_name) || "none"%></samp></span>
           </div>
         </header>
-        <main id="content">
+        <main id="content" class="markdown-body">
           <%- marked(currendArticle.content) %>
         </main>
       </div>
