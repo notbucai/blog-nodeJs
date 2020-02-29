@@ -1,5 +1,6 @@
 const User = require("../DB/User.dao");
 const { v_user_args } = require("../utils/userUtils");
+const emailutils = require('../utils/emailutils')();
 
 async function get_fun(ctx, next) {
 
@@ -35,7 +36,7 @@ async function post_fun(ctx, next) {
       ctx.code = 504;
       throw Error("验证码失效，请重新获取验证码");
     }
-    if(codeObj.code != code){
+    if (codeObj.code != code) {
       ctx.code = 402;
       throw Error("验证码不匹配，请重试");
     }
@@ -44,9 +45,15 @@ async function post_fun(ctx, next) {
     const user = new User(req_body);
 
     const reg_succeed = await User.reg(user);
-    
+
     if (reg_succeed) {
       res.code = 200;
+      // sendNewUser
+      try {
+        emailutils.sendNewUser(user.u_email, u_name);
+      } catch (error) {
+        console.log(error);
+      }
       res.msg = "注册成功";
     } else {
       res.code = 502;
